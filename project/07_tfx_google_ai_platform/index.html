@@ -1,0 +1,1626 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Sirawit Putpat" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="In this post I will be exploring the TFX and its integration with Kubeflow Pipelines on Google AI Platform.
+This post is kind of my summarization for my learning purpose." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://example.com/project/07_tfx_google_ai_platform/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cf95f60f117dde1881b54a0e41ebb5ec.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://example.com/project/07_tfx_google_ai_platform/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="" />
+  <meta property="og:url" content="https://example.com/project/07_tfx_google_ai_platform/" />
+  <meta property="og:title" content="Continuous Training with TFX and Kubeflow Pipelines | " />
+  <meta property="og:description" content="In this post I will be exploring the TFX and its integration with Kubeflow Pipelines on Google AI Platform.
+This post is kind of my summarization for my learning purpose." /><meta property="og:image" content="https://example.com/project/07_tfx_google_ai_platform/featured.png" />
+    <meta property="twitter:image" content="https://example.com/project/07_tfx_google_ai_platform/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-10-10T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-10-10T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/project/07_tfx_google_ai_platform/"
+  },
+  "headline": "Continuous Training with TFX and Kubeflow Pipelines",
+  
+  "image": [
+    "https://example.com/project/07_tfx_google_ai_platform/featured.png"
+  ],
+  
+  "datePublished": "2021-10-10T00:00:00Z",
+  "dateModified": "2021-10-10T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sirawit Putpat"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "In this post I will be exploring the TFX and its integration with Kubeflow Pipelines on Google AI Platform.\nThis post is kind of my summarization for my learning purpose."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Continuous Training with TFX and Kubeflow Pipelines | </title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c3e2c33c5d039d2093a44763244ebfac" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>Gallery</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article article-project">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Continuous Training with TFX and Kubeflow Pipelines</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Oct 10, 2021
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 464px;">
+  <div style="position: relative">
+    <img src="/project/07_tfx_google_ai_platform/featured_hu9c3198156f4f1700ab49e7a12a2e224e_84465_1200x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  
+  <div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+  
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-dataset">1. Dataset</a></li>
+    <li><a href="#2-create-clusters">2. Create Clusters</a></li>
+    <li><a href="#3-understanding-tfx-pipelines">3. Understanding TFX Pipelines</a>
+      <ul>
+        <li><a href="#artifact">Artifact</a></li>
+        <li><a href="#parameter">Parameter</a></li>
+        <li><a href="#component">Component</a></li>
+        <li><a href="#pipeline">Pipeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-tfx-custom-components">4. TFX Custom Components</a>
+      <ul>
+        <li><a href="#tfx-components-at-runtime">TFX components at runtime</a></li>
+        <li><a href="#types-of-custom-components">Types of custom components</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-code">5. Code</a></li>
+    <li><a href="#6-pipeline-dashboard">6. Pipeline Dashboard</a></li>
+    <li><a href="#7-dataflow">7. Dataflow</a></li>
+    <li><a href="#my-thoughts">My Thoughts</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+        
+      </div>
+  
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>In this post I will be exploring the TFX and its integration with Kubeflow Pipelines on Google AI Platform.</p>
+<p>This post is kind of my summarization for my learning purpose.</p>
+<h2 id="1-dataset">1. Dataset</h2>
+<h2 id="2-create-clusters">2. Create Clusters</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/01.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/04.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/05.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/06.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<h2 id="3-understanding-tfx-pipelines">3. Understanding TFX Pipelines</h2>
+<p>In order to understand TFX pipelines, we need to understand some keywords. For full tutorial, refer to TensorFlow&rsquo;s article <a href="https://www.tensorflow.org/tfx/guide/understanding_tfx_pipelines" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="artifact">Artifact</h3>
+<p>Artifacts are the output of the steps in a TFX pipeline. They can be used by subsequent steps in the pipeline.</p>
+<p>Artifacts must be stongly typed with an <strong>artifact type</strong> registered in the <a href="https://www.tensorflow.org/tfx/guide/mlmd" target="_blank" rel="noopener">ML Metadata</a> store. This point is not very clear yet; I need to research and will come back to expand more on this later.</p>
+<p>Questions</p>
+<ul>
+<li>Where does artifact get stored?</li>
+<li>What needs to be changed if we run the pipeline on a Cloud?</li>
+</ul>
+<h3 id="parameter">Parameter</h3>
+<p>Parameters are something that we can set through configuration, instead of hard coding; they are just like the hyperparameters of a ML/DL model.</p>
+<h3 id="component">Component</h3>
+<p>Component is an implementation of the task in our pipeline. Components in TFX are composed of</p>
+<ul>
+<li><strong>Component specification</strong>: This defines the component&rsquo;s input and output artifacts, and component&rsquo;s parameters.</li>
+<li><strong>Executor</strong>: This implements the real work of a step in the pipeline.</li>
+<li><strong>Component interface</strong>: This packages the component specification and executor for use in a pipeline. (This is not very clear.)</li>
+</ul>
+<p>Questions</p>
+<ul>
+<li>Where does the component get run?</li>
+<li>Do components run in the same environment? Same OS and same dependencies?</li>
+<li>What if each component requires different dependencies?</li>
+</ul>
+<h3 id="pipeline">Pipeline</h3>
+<p>TensorFlow says that a TFX pipeline is a <em><strong>portable</strong></em> implementation of an ML workflow, as it can be run on different ochestrators, such as: Apache Airflow, Apache Beam, and Kubeflow Pipelines.</p>
+<p>First, we build a pipeline, which is of type <code>tfx.orchestration.pipeline.Pipeline</code>:</p>
+<pre><code class="language-python">from tfx.orchestration import pipeline
+
+def _create_pipeline() -&gt; pipeline.Pipeline:
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;
+    pass
+</code></pre>
+<p>To select a different ochestration tool, we need to import from <code>tfx.orchestration</code> module.</p>
+<pre><code class="language-python"># Airflow
+from tfx.orchestration.airflow.airflow_dag_runner import AirflowDagRunner
+from tfx.orchestration.airflow.airflow_dag_runner import AirflowPipelineConfig
+
+DAG = AirflowDagRunner(AirflowPipelineConfig()).run(
+          _create_pipeline()
+      )
+</code></pre>
+<pre><code class="language-python"># Kubeflow
+from tfx.orchestration.kubeflow import kubeflow_dag_runner
+
+kubeflow_dag_runner.KubeflowDagRunner().run(
+    create_pipeline()
+)
+</code></pre>
+<br>
+<h2 id="4-tfx-custom-components">4. TFX Custom Components</h2>
+<p>Understanding the custom components will get us far! Refer to TensorFlow&rsquo;s article <a href="https://www.tensorflow.org/tfx/guide/understanding_custom_components" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="tfx-components-at-runtime">TFX components at runtime</h3>
+<blockquote>
+<p>When a pipeline runs a TFX component, the component is executed in three phases:</p>
+<ol>
+<li>First, the Driver uses the component specification to retrieve the required artifacts from the metadata store and pass them into the component.</li>
+<li>Next, the Executor performs the component&rsquo;s work.</li>
+<li>Then the Publisher uses the component specification and the results from the executor to store the component&rsquo;s outputs in the metadata store.</li>
+</ol>
+</blockquote>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/component.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="types-of-custom-components">Types of custom components</h3>
+<ol>
+<li>
+<p><strong>Python function-based</strong> components</p>
+<ul>
+<li>The specification is completely defined in the Python code.</li>
+<li>The function&rsquo;s arguments with type annotations describe input artifact, output artifact, and parameters.</li>
+<li>The function&rsquo;s body defines the component&rsquo;s executor.</li>
+<li>The component interface is dedined by adding <code>@component</code> decorator.</li>
+</ul>
+<br>
+<pre><code class="language-python">@component
+def MyComponent(
+        model: InputArtifact[Model],
+        output: OutputArtifact[Model],
+        threshold: Parameter[int] = 10
+    ) -&gt; OutputDict(accuracy=float):
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;
+    pass
+</code></pre>
+</li>
+<li>
+<p><strong>Container-based</strong> components</p>
+<ul>
+<li>This is suitable for building a component with custom runtime environment and dependencies.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fully custom</strong> components</p>
+<ul>
+<li>This is for building a component that is not in the built-in TFX standard components.</li>
+<li>It lets us build a component by implementing a custom <em>component specification</em>, <em>executor</em>, and <em>component interface</em> classes.</li>
+</ul>
+</li>
+</ol>
+<h2 id="5-code">5. Code</h2>
+<br>
+<h2 id="6-pipeline-dashboard">6. Pipeline Dashboard</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/10.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/11.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/13.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/15_2.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/16_2.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/17_1.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/17_2.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<h2 id="7-dataflow">7. Dataflow</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/19.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/20.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/21.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/22.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/07/24.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<br>
+<h2 id="my-thoughts">My Thoughts</h2>
+<ul>
+<li>
+<p>TFX seems to be built around TensorFlow. Not very sure if it&rsquo;s gonna work with other DL/ML libraries without heavily modifying the TFX components. But if we are in a Google Cloud/TensorFlow ecosystem, stick with it!.</p>
+</li>
+<li>
+<p>Unlike TFX, MLFlow seems to be more general and more open to other DL/ML libraries.</p>
+</li>
+</ul>
+<br>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.tensorflow.org/tfx/tutorials">https://www.tensorflow.org/tfx/tutorials</a></li>
+<li><a href="https://www.tensorflow.org/tfx/guide/mlmd">https://www.tensorflow.org/tfx/guide/mlmd</a></li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/machine-learning-engineering/">Machine Learning Engineering</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://example.com/project/07_tfx_google_ai_platform/&amp;text=Continuous%20Training%20with%20TFX%20and%20Kubeflow%20Pipelines" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://example.com/project/07_tfx_google_ai_platform/&amp;t=Continuous%20Training%20with%20TFX%20and%20Kubeflow%20Pipelines" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://example.com/project/07_tfx_google_ai_platform/&amp;title=Continuous%20Training%20with%20TFX%20and%20Kubeflow%20Pipelines" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+  
+
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.4/mermaid.min.js" integrity="sha512-as1BF4+iHZ3BVO6LLDQ7zrbvTXM+c/1iZ1qII/c3c4L8Rn5tHLpFUtpaEtBNS92f+xGsCzsD7b62XP3XYap6oA==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cpp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cmake.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/xml.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.8859d3cf6e5d748215fea2814e2e9c7f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

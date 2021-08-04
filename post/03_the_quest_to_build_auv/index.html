@@ -1,0 +1,1246 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Sirawit Putpat" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="&ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://example.com/post/03_the_quest_to_build_auv/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cf95f60f117dde1881b54a0e41ebb5ec.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://example.com/post/03_the_quest_to_build_auv/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="" />
+  <meta property="og:url" content="https://example.com/post/03_the_quest_to_build_auv/" />
+  <meta property="og:title" content="The Quest to Build an Autonomous Underwater Vehicle | " />
+  <meta property="og:description" content="&ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app." /><meta property="og:image" content="https://example.com/post/03_the_quest_to_build_auv/featured.png" />
+    <meta property="twitter:image" content="https://example.com/post/03_the_quest_to_build_auv/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-01-04T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-01-04T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/03_the_quest_to_build_auv/"
+  },
+  "headline": "The Quest to Build an Autonomous Underwater Vehicle",
+  
+  "image": [
+    "https://example.com/post/03_the_quest_to_build_auv/featured.png"
+  ],
+  
+  "datePublished": "2021-01-04T00:00:00Z",
+  "dateModified": "2021-01-04T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sirawit Putpat"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "\u0026ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>The Quest to Build an Autonomous Underwater Vehicle | </title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="1af90fdb74f65630ef4413d15d339221" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>Gallery</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>The Quest to Build an Autonomous Underwater Vehicle</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 4, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 984px; max-height: 984px;">
+  <div style="position: relative">
+    <img src="/post/03_the_quest_to_build_auv/featured.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  
+
+      <div class="article-container">
+
+        <div class="article-style">
+          <blockquote>
+<p>&ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app. We will be liberated from driving, prevent over 90% of car crashes, provide freedom of mobility to the elderly and disabled, and decrease our dependence on fossil fuels.&rdquo; — The Quest to Build the Driverless Car</p>
+</blockquote>
+<p>The same applies to oil and gas industry. Although robotic technologies have entered the oil and gas industry for around some time, the quest to build the autonomous underwater vehicle must go on!</p>
+<p>In this post, I will briefly write about the kind of the things we do at our R&amp;D team. (Please note that I cannot write all the details and so I have skipped some parts.)</p>
+<h2 id="a-system">A System</h2>
+<p>What do we need in order to build an autonomous underwater vehicle and its system?</p>
+<ul>
+<li>Hardware</li>
+<li>Software
+<ul>
+<li><a href="#navigation-software">Navigation software</a></li>
+<li><a href="#perception-algorithms">Perception algorithms</a></li>
+<li><a href="">Planning algorithms</a></li>
+<li><a href="#control-algorithms">Control algorithms</a></li>
+<li><a href="#simulation-platform">Simulation platform</a></li>
+<li><a href="#data-analytics-software">Data analytics software</a></li>
+</ul>
+</li>
+</ul>
+<p>All the teams (software, electrical, and mechanical) collaboratively design the robot. The physical aspect of the robot is mainly designed by a mechanical engineer team where they need to consider things such as the dynamic model, hydrodynamic model, robot mechanisms, and etc. The electrical engineer team is the ones who design and lay out electrical circuits connecting all components to a system. The software team mostly look at the high level aspect of the robot such as what sensors, what algorithms, how to communicate with the vessel, how many computing units, how to store logging data, and the list goes on.</p>
+<h2 id="hardware">Hardware</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/post/03/01.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/post/03/02.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="navigation-software">Navigation Software</h2>
+<ul>
+<li>IMU dead reckoning</li>
+<li>SLAM</li>
+<li>Map building</li>
+</ul>
+<h2 id="perception-algorithms">Perception Algorithms</h2>
+<p>Perception algorithms are probably the key to intelligent autonomous vehicles. At ARV, we have developed several algorithms, including but not limited to 2D object detection, 3D object detection, point cloud-related algorithms, etc., in order to tackle the challenges we encountered in subsea robotics.</p>
+<p>We have also developed several machine learning and <a href="https://sirawit-github.github.io/post/05_data_sci_pttep_arv/" target="_blank" rel="noopener">deep learning models for automatic pipeline inspection</a> as well. These are used both in online (real-time) and offline (<a href="#data-analytics-software">data analytics software</a>).</p>
+<h2 id="planning-algorithms">Planning Algorithms</h2>
+<ul>
+<li>Way point planning</li>
+<li>Optimal path planning</li>
+</ul>
+<h2 id="control-algorithms">Control Algorithms</h2>
+<h2 id="simulation-platform">Simulation Platform</h2>
+<p>This is probably the testbed of our robotics software development. We use <a href="http://gazebosim.org/" target="_blank" rel="noopener">Gazebo</a> as a simulator for realistic simulation, with some custom-implemented sensor plugins that we developed for our own use.</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/post/04/simulation_old.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>Of course, these custom plugins should run very fast for the simulation to run smoothly, so the algorihtms must be hevily optimized. For example, the custom sonar plugin was implemented in CUDA to speed things up.</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/post/06/cuda.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="data-analytics-software">Data Analytics Software</h2>
+<p>The collected data when the robot operates at the seabed must be analyzed in some way. We build our web application where customers can log in to see the analyzed data (as well as raw data) and the generated report.</p>
+
+
+<div id="chart-617389524" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./data.json", function(chart) {
+        Plotly.plot('chart-617389524', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+
+        </div>
+
+        
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/robotics/">Robotics</a>
+  
+  <a class="badge badge-light" href="/tag/c-/">C&#43;&#43;</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://example.com/post/03_the_quest_to_build_auv/&amp;text=The%20Quest%20to%20Build%20an%20Autonomous%20Underwater%20Vehicle" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://example.com/post/03_the_quest_to_build_auv/&amp;t=The%20Quest%20to%20Build%20an%20Autonomous%20Underwater%20Vehicle" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://example.com/post/03_the_quest_to_build_auv/&amp;title=The%20Quest%20to%20Build%20an%20Autonomous%20Underwater%20Vehicle" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/12_arv_hackathon_2021/">AI &amp; Robotics Hackathon 2021</a></li>
+      
+      <li><a href="/post/11_codegoda_2021/">Codegoda 2021</a></li>
+      
+      <li><a href="/post/06_cuda_basic/">Fast Execution with CUDA!</a></li>
+      
+      <li><a href="/project/05_monocular_slam_deep_learning/">Monocular SLAM with Deep Learning</a></li>
+      
+      <li><a href="/post/01_visual_odometry/">Visual Odometry Implementation from Scratch</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+      </div>
+
+  
+
+</article>
+    
+
+
+
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cpp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cmake.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/xml.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.58.5/plotly.min.js" integrity="sha512-7wMLZxKDFvReIWPUzBfcEKsuOriDUEcWkV2bNHV2/tQUmoZj2eLpkQOF7nBbtwVG8WrSl5rTN87cqnS7ZelhzQ==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.8859d3cf6e5d748215fea2814e2e9c7f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

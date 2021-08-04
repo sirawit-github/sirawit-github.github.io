@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; | </title>
+    <link>https://example.com/tag/c-/</link>
+      <atom:link href="https://example.com/tag/c-/index.xml" rel="self" type="application/rss+xml" />
+    <description>C&#43;&#43;</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>C&#43;&#43;</title>
+      <link>https://example.com/tag/c-/</link>
+    </image>
+    
+    <item>
+      <title>Codegoda 2021</title>
+      <link>https://example.com/post/11_codegoda_2021/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/11_codegoda_2021/</guid>
+      <description>&lt;!-- &lt;details class=&#34;toc-inpage d-print-none  &#34; open&gt;
+  &lt;summary class=&#34;font-weight-bold&#34;&gt;Table of Contents&lt;/summary&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#1&#34;&gt;1.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2&#34;&gt;2.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3&#34;&gt;3.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4&#34;&gt;4.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5&#34;&gt;5.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#6-which-microservice-failed&#34;&gt;6. Which microservice failed?&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#7&#34;&gt;7.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#8&#34;&gt;8.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#9&#34;&gt;9.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#notes&#34;&gt;Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/details&gt;
+ --&gt;
+&lt;h2 id=&#34;1&#34;&gt;1.&lt;/h2&gt;
+&lt;h2 id=&#34;2&#34;&gt;2.&lt;/h2&gt;
+&lt;h2 id=&#34;3&#34;&gt;3.&lt;/h2&gt;
+&lt;h2 id=&#34;4&#34;&gt;4.&lt;/h2&gt;
+&lt;h2 id=&#34;5&#34;&gt;5.&lt;/h2&gt;
+&lt;h2 id=&#34;6-which-microservice-failed&#34;&gt;6. Which microservice failed?&lt;/h2&gt;
+&lt;p&gt;Given the services (nodes in the graph) that alert, the task is to identify which services is the root cause of the failure. A failure is a root cause only when there are no other dependencies which also fail.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mermaid&#34;&gt;graph TD;
+  A--&amp;gt;B;
+  A--&amp;gt;C;
+  B--&amp;gt;D;
+  C--&amp;gt;E;
+  E--&amp;gt;D;
+  C--&amp;gt;F;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Input (alerts):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1 E 
+3 A C E 
+2 A D 
+3 D E F 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Example output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1 E 
+1 E 
+1 D 
+2 D F 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The input graph (omitted) is the one shown in the diagram above.
+The input has 4 alerts.&lt;/p&gt;
+&lt;p&gt;In the first case, only service &lt;code&gt;E&lt;/code&gt; has an alert. Thus, &lt;code&gt;E&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the second alert case, services &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt; have alerts. Since &lt;code&gt;A&lt;/code&gt; depends on &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;C&lt;/code&gt; depends on &lt;code&gt;E&lt;/code&gt;, we don’t consider them the root cause. &lt;code&gt;E&lt;/code&gt; has no dependency and has an alert. Thus, &lt;code&gt;E&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the third case, services &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;D&lt;/code&gt; have alerts. Since &lt;code&gt;A&lt;/code&gt; depends on &lt;code&gt;D&lt;/code&gt; through &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt;, we still consider that the failure on service &lt;code&gt;D&lt;/code&gt; might have caused a failure on service &lt;code&gt;A&lt;/code&gt; even if the alerts on services &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt; did not fire. Thus, &lt;code&gt;D&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the fourth case, services &lt;code&gt;D&lt;/code&gt;, &lt;code&gt;E&lt;/code&gt; and &lt;code&gt;F&lt;/code&gt; have alerts. &lt;code&gt;E&lt;/code&gt; depends on &lt;code&gt;D&lt;/code&gt;, so &lt;code&gt;E&lt;/code&gt; is not the root cause. &lt;code&gt;D&lt;/code&gt; and &lt;code&gt;F&lt;/code&gt; do not depend on any services which failed, so they both are the root causes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is probably not an optimal solution, but it came first when I tried. The idea is to construct a reverse graph and find all the descendants. In this case, the time complexity would be $O(A(E + V))$ where $A$ is the number of alerts and $V$ and $E$ is the number of vertices and edges in the graph respectively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void dfs(
+  const int root,
+  const int start,
+  const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; adj, // Adjacency list of the reversed graph
+  vector&amp;lt;bool&amp;gt;&amp;amp; visited,
+  unordered_map&amp;lt;int, bool&amp;gt;&amp;amp; root_causes
+)
+{
+  if (root != start) {
+    auto it = root_causes.find(root);
+    if (it != root_causes.end()) {
+      root_causes.erase(it);
+    }
+  }
+  visited[root] = true;
+  for (const auto n : adj[root]) {
+    if (!visited[n]) {
+      dfs(n, start, adj, visited, root_causes);
+    }
+  }
+}
+
+void solve(
+  const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; adj, // Adjacency list of the reversed graph
+  unordered_map&amp;lt;int, bool&amp;gt; services_with_alert,
+  const vector&amp;lt;string&amp;gt;&amp;amp; service_names
+)
+{
+  unordered_map&amp;lt;int, bool&amp;gt; root_causes = services_with_alert;
+  for (const auto p : services_with_alert) {
+    size_t num_services = service_names.size();
+    vector&amp;lt;bool&amp;gt; visited(num_services, false);
+    dfs(p.first, p.first, adj, visited, root_causes);
+  }
+  // print out solution
+  cout &amp;lt;&amp;lt; root_causes.size();
+  for (const auto p : root_causes) {
+    cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; service_names[p.first];
+  }
+  cout &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;7&#34;&gt;7.&lt;/h2&gt;
+&lt;h2 id=&#34;8&#34;&gt;8.&lt;/h2&gt;
+&lt;h2 id=&#34;9&#34;&gt;9.&lt;/h2&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I couldn&amp;rsquo;t seem to find restrictions on sharing or posting questions in the terms (&lt;a href=&#34;https://codegoda.io/terms-and-conditions/)&#34;&gt;https://codegoda.io/terms-and-conditions/)&lt;/a&gt;. But if I read it wrong, Dear Agoda, please let me know if it is against the terms.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fast Execution with CUDA!</title>
+      <link>https://example.com/post/06_cuda_basic/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/06_cuda_basic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Quest to Build an Autonomous Underwater Vehicle</title>
+      <link>https://example.com/post/03_the_quest_to_build_auv/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/03_the_quest_to_build_auv/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app. We will be liberated from driving, prevent over 90% of car crashes, provide freedom of mobility to the elderly and disabled, and decrease our dependence on fossil fuels.&amp;rdquo; — The Quest to Build the Driverless Car&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The same applies to oil and gas industry. Although robotic technologies have entered the oil and gas industry for around some time, the quest to build the autonomous underwater vehicle must go on!&lt;/p&gt;
+&lt;p&gt;In this post, I will briefly write about the kind of the things we do at our R&amp;amp;D team. (Please note that I cannot write all the details and so I have skipped some parts.)&lt;/p&gt;
+&lt;h2 id=&#34;a-system&#34;&gt;A System&lt;/h2&gt;
+&lt;p&gt;What do we need in order to build an autonomous underwater vehicle and its system?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hardware&lt;/li&gt;
+&lt;li&gt;Software
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#navigation-software&#34;&gt;Navigation software&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#perception-algorithms&#34;&gt;Perception algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;Planning algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#control-algorithms&#34;&gt;Control algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#simulation-platform&#34;&gt;Simulation platform&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data-analytics-software&#34;&gt;Data analytics software&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All the teams (software, electrical, and mechanical) collaboratively design the robot. The physical aspect of the robot is mainly designed by a mechanical engineer team where they need to consider things such as the dynamic model, hydrodynamic model, robot mechanisms, and etc. The electrical engineer team is the ones who design and lay out electrical circuits connecting all components to a system. The software team mostly look at the high level aspect of the robot such as what sensors, what algorithms, how to communicate with the vessel, how many computing units, how to store logging data, and the list goes on.&lt;/p&gt;
+&lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/03/01.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/03/02.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;navigation-software&#34;&gt;Navigation Software&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IMU dead reckoning&lt;/li&gt;
+&lt;li&gt;SLAM&lt;/li&gt;
+&lt;li&gt;Map building&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;perception-algorithms&#34;&gt;Perception Algorithms&lt;/h2&gt;
+&lt;p&gt;Perception algorithms are probably the key to intelligent autonomous vehicles. At ARV, we have developed several algorithms, including but not limited to 2D object detection, 3D object detection, point cloud-related algorithms, etc., in order to tackle the challenges we encountered in subsea robotics.&lt;/p&gt;
+&lt;p&gt;We have also developed several machine learning and &lt;a href=&#34;https://sirawit-github.github.io/post/05_data_sci_pttep_arv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;deep learning models for automatic pipeline inspection&lt;/a&gt; as well. These are used both in online (real-time) and offline (&lt;a href=&#34;#data-analytics-software&#34;&gt;data analytics software&lt;/a&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;planning-algorithms&#34;&gt;Planning Algorithms&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Way point planning&lt;/li&gt;
+&lt;li&gt;Optimal path planning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;control-algorithms&#34;&gt;Control Algorithms&lt;/h2&gt;
+&lt;h2 id=&#34;simulation-platform&#34;&gt;Simulation Platform&lt;/h2&gt;
+&lt;p&gt;This is probably the testbed of our robotics software development. We use &lt;a href=&#34;http://gazebosim.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gazebo&lt;/a&gt; as a simulator for realistic simulation, with some custom-implemented sensor plugins that we developed for our own use.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/04/simulation_old.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Of course, these custom plugins should run very fast for the simulation to run smoothly, so the algorihtms must be hevily optimized. For example, the custom sonar plugin was implemented in CUDA to speed things up.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/06/cuda.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;data-analytics-software&#34;&gt;Data Analytics Software&lt;/h2&gt;
+&lt;p&gt;The collected data when the robot operates at the seabed must be analyzed in some way. We build our web application where customers can log in to see the analyzed data (as well as raw data) and the generated report.&lt;/p&gt;
+
+
+&lt;div id=&#34;chart-617389524&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-617389524&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

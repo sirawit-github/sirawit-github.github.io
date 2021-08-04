@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Vision | </title>
+    <link>https://example.com/tag/computer-vision/</link>
+      <atom:link href="https://example.com/tag/computer-vision/index.xml" rel="self" type="application/rss+xml" />
+    <description>Computer Vision</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 12 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Computer Vision</title>
+      <link>https://example.com/tag/computer-vision/</link>
+    </image>
+    
+    <item>
+      <title>Fast Execution with CUDA!</title>
+      <link>https://example.com/post/06_cuda_basic/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/06_cuda_basic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Custom Sonar Simulation in Gazebo</title>
+      <link>https://example.com/post/04_sonar_sim/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/04_sonar_sim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual Odometry Implementation from Scratch</title>
+      <link>https://example.com/post/01_visual_odometry/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/01_visual_odometry/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch. For a programming language, I choose MATLAB because it is easy-to-use and fast for prototyping a project.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt;&lt;/em&gt; This is not a state-of-the-art implementation. This simply serves the purpose of learning.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;To give a general idea, visual odometry (VO) is an algorithm that aims to recover the path incrementally, by using the visual input from cameras, and hence the name. It can be considered as a sequential structure from motion, as opposed to hierarchical structure from motion. Imagine a robot or an agent, attached with a calibrated camera $C$, moves through an environment and receives the image continuously. The images $I_k, I_{k-1}$ are taken at different time steps $k$ and $k-1$, which corresponds to the camera pose $C_k$ and $C_{k-1}$ respectively. The task of VO is basically to retrieve the transformation matrix $T = \left[R \lvert t \right]$ that relates two camera poses, and concatenate all the transformaitons $T_k$ to get the current camera pose:&lt;/p&gt;
+&lt;p&gt;$$ C_{t} = T_{t,t-1}C_{t-1}$$&lt;/p&gt;
+&lt;h2 id=&#34;getting-things-up--running&#34;&gt;Getting Things Up &amp;amp; Running&lt;/h2&gt;
+&lt;p&gt;I first have an initialization function &lt;code&gt;vo_initialize.m&lt;/code&gt; that takes two image frames, establishing keypoint correspondences between these two frames using KLT feature tracker, estimating relative camera pose, and finally triangulating an initial 3D point cloud landmarks. I admit that these may sound lacking of excitement (as they are something that is well understood in the computer vision community), but they are not easy to implement from scratch in a single sit.&lt;/p&gt;
+&lt;h3 id=&#34;feature-detection&#34;&gt;Feature Detection&lt;/h3&gt;
+&lt;p&gt;This is a simple plementation of Harris corner detector. For each pixel $(u,v)$, we calculate a score&lt;/p&gt;
+&lt;p&gt;$$R = det(A_{u,v}) - {\lambda}trace^2(A_{u,v})$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ A_{u,v} = \begin{bmatrix} \sum{I^2_{x}} &amp;amp; \sum{I_{x}I_{y}}\ \sum{I_{x}I_{y}} &amp;amp; \sum{I^2_{y}} \end{bmatrix} $$&lt;/p&gt;
+&lt;p&gt;and $I_x, I_y$ are the image gradients in $x$ and $y$ direction respectively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;I_x = conv2(img, [-1 0 1; -2 0 2; -1 0 1], &#39;valid&#39;);
+I_y = conv2(img, [-1 -2 -1; 0 0 0; 1 2 1], &#39;valid&#39;);
+I_xx = double(I_x.^2);
+I_yy = double(I_y.^2);
+I_xy = double(I_x.*I_y);
+I_xx_sum = conv2(I_xx, ones(patch_size), &#39;valid&#39;);
+I_yy_sum = conv2(I_yy, ones(patch_size), &#39;valid&#39;);
+I_xy_sum = conv2(I_xy, ones(patch_size), &#39;valid&#39;);
+
+pad_size = floor((patch_size+1)/2);
+scores = (I_xx_sum.*I_yy_sum - I_xy_sum.^2) - lambda*(I_xx_sum + I_yy_sum).^2;
+scores(scores &amp;lt; 0) = 0;
+scores = padarray(scores, [pad_size pad_size]);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After calculating the score, we simply select $k$ keypoints with highest scores (with non-maximum suppression).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;scores_pad = padarray(scores, [r r]);
+score_size = size(scores_pad);
+keypoints = zeros(2, k);
+for i = 1:k
+    [~, idx] = max(scores_pad, [], &#39;all&#39;, &#39;linear&#39;);
+    [row, col] = ind2sub(score_size, idx);
+    keypoints(:, i) = [row; col] - r;
+    scores_pad(row-r:row+r, col-r:col+r) = 0;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;klt-feature-tracker&#34;&gt;KLT Feature Tracker&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;pose-estimation&#34;&gt;Pose Estimation&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;triangulation&#34;&gt;Triangulation&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result of &lt;code&gt;vo_initialize.m&lt;/code&gt; seems reasonable. Good to go!&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/01/post.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;problems-from-previous-implementation&#34;&gt;Problems from Previous Implementation&lt;/h2&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;estimate-world-camera-pose&#34;&gt;Estimate World Camera Pose&lt;/h2&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;bundle-adjustment&#34;&gt;Bundle Adjustment&lt;/h2&gt;
+&lt;p&gt;Bundle adjustment is a very cool concept. To put it simply, it is an optimization algorithm used to refine the estimated trajectory.&lt;/p&gt;
+&lt;p&gt;In this implementation, a &lt;em&gt;motion-only&lt;/em&gt; bundle adjustment is implemented, which optimizes only the camera orientation $R$ and position $t$. This implies that&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
+&lt;p&gt;Putting it all together, the &lt;code&gt;vo_initialize.m&lt;/code&gt; function initializes the VO pipeline, creating initial 3D point landmarks, extracting initial keypoints, and estimating the initial pose of the camera. The &lt;code&gt;vo_process.m&lt;/code&gt; sequentially extracting and tracking image features from an image frame, across frames, and simultaneously estimating the pose of the camera. Bundle adjustment is also implemented to refine the estimated pose at each step. Lastly, new 3D points are regularly created as the number of currently tracked keypoints is shrinking over time. The following is the final result.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/A5HnnSiZ_LM&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;p&gt;From the video, it is obvious that this is not a state-of-the-art implementation. There are various components that are not implemented. As we can see, the estimated trajectory starts to deviate from the ground truth after some time, due to the scale drift&amp;ndash;a common problem in monocular VO. The estimated trajetory also wiggles slightly, probaly due to the fact that the full bundle adjustment is not implemented. And the most importantly, I did not try to implement a loop closure.&lt;/p&gt;
+&lt;h2 id=&#34;reflections&#34;&gt;Reflections&lt;/h2&gt;
+&lt;p&gt;The task of implementing VO from scratch may sound lacking of excitement. I believe that the conventional pipeline of VO and SLAM is something that is already well-understood in the computer vision community. What I realize is that academic papers usually have missing steps that are left for the readers to figure out. Here, I tried to connect those steps and the result stands as a self-assesment of my understanding.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

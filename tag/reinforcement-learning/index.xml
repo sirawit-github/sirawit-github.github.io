@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reinforcement Learning | </title>
+    <link>https://example.com/tag/reinforcement-learning/</link>
+      <atom:link href="https://example.com/tag/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Reinforcement Learning</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Reinforcement Learning</title>
+      <link>https://example.com/tag/reinforcement-learning/</link>
+    </image>
+    
+    <item>
+      <title>Autonomous Ball-Collecting Robot using Reinforcement Learning</title>
+      <link>https://example.com/project/02_ball_robot/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/02_ball_robot/</guid>
+      <description>&lt;p&gt;This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor. The algorithms were implemented on &lt;a href=&#34;https://www.intel.com/content/www/us/en/products/details/nuc.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Intel NUC&lt;/a&gt; and &lt;a href=&#34;https://developer.nvidia.com/embedded/jetson-tx2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nvidia Jetson TX2&lt;/a&gt; board.&lt;/p&gt;
+&lt;p&gt;This is my attempt at re-writing a write-up because a lot of recruiters ask me how the project was done and I sometimes forget (it was done in 2018).&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;optimal-policy-and-optimal-value-functions&#34;&gt;Optimal Policy and Optimal Value Functions&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Bellman optimality equation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For optimal value function $v_{*}$:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+v_{*}(s) &amp;amp;= \max_{a} E \left[ R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_{t}=s, A_{t}=a \right] \\&lt;br&gt;
+&amp;amp;= \max_{a} \sum_{s&#39;,r} p(s&#39;,r \vert s,a) \left[ r + \gamma  v_{*}(s&#39;) \right]
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;For optimal action-value function $q_{*}$:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+q_{*}(s,a) &amp;amp;= E \left[ R_{t+1} + \gamma \max_{a&#39;} q_{*}(S_{t+1}, a&#39;) \vert S_{t} = s, A_{t} = a \right] \\&lt;br&gt;
+&amp;amp;= \sum_{s&#39;,r} p(s&#39;,r \vert s,a) \left[ r + \gamma \max_{a&#39;} q_{*}(s&#39;,a&#39;) \right]
+\end{aligned}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;monte-carlo-methods&#34;&gt;Monte Carlo Methods&lt;/h2&gt;
+&lt;p&gt;Monte Carlo methods only require a sample of states, actions, and rewards from interaction between the agent and the environment. It is model-free; the probability distributions such as state-transition $p(s&#39; \vert s,a)$ need not to be known.&lt;/p&gt;
+&lt;h2 id=&#34;q-learning&#34;&gt;Q-Learning&lt;/h2&gt;
+&lt;p&gt;$$ Q(s,a) \leftarrow (1-\alpha)Q(s,a) + \alpha \left[ r + \gamma \max_{a&#39;} Q(s&#39;,a&#39;) \right] $$&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Initialize Q(s, a)
+Start with state &amp;quot;s&amp;quot;
+Loop:
+    Select action &amp;quot;a&amp;quot; with e-greedy
+    Execute action &amp;quot;a&amp;quot;, receive immediate reward &amp;quot;r&amp;quot; and go to state &amp;quot;s&#39;&amp;quot;
+    Q(s, a) = Q(s, a) + alpha*[r + gamma * max{Q(s&#39;, a&#39;)} - Q(s, a)]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But what if the number of $(s,a)$ pairs are very big? Then it is not practical to keep the table $Q$ for every pair of $(s,a)$. Instead, we could maintain $Q(s,a)$ as a parameterized function. This is where the neural network comes into play.&lt;/p&gt;
+&lt;h2 id=&#34;q-network&#34;&gt;Q-Network&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Training&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We define the &lt;strong&gt;loss&lt;/strong&gt; as:&lt;/p&gt;
+&lt;p&gt;$$
+L(\theta) = \left( \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta }) \right) - Q(s,a|\theta) \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;Our objective is to find weight $\theta$ of the network to minimize the loss:&lt;/p&gt;
+&lt;p&gt;$$
+\min_{\theta} L(\theta) = \min_{\theta} \left[ \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta }) - Q(s,a|\theta) \right)^2 \right]
+$$&lt;/p&gt;
+&lt;p&gt;where $r$ is the immediate reward that we observe and the term $r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta })$ is the approximated target.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Convergence&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;However, using a neural network to represent the action-value function tends to be unstable due to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Correlations between samples&lt;/li&gt;
+&lt;li&gt;Non-stationary targets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How does DeepMind solve this issue?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Experience replay&lt;/li&gt;
+&lt;li&gt;Separated networks&lt;/li&gt;
+&lt;li&gt;Go deeper (added by myself)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/go_deeper.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;experience-replay&#34;&gt;Experience Replay&lt;/h2&gt;
+&lt;h2 id=&#34;separated-networks&#34;&gt;Separated Networks&lt;/h2&gt;
+&lt;p&gt;$$
+L(\theta) = \left( \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta^{-} }) \right) - Q(s,a|\theta) \right)^2
+$$&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;gallery&#34;&gt;Gallery&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/1.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/2.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/3.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/4.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mnih, V. et al. &lt;a href=&#34;https://deepmind.com/research/publications/2019/human-level-control-through-deep-reinforcement-learning&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Human-level control through deep reinforcement learning.&lt;/a&gt; Nature 518, 529–533 (2015).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

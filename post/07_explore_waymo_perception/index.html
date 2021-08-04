@@ -1,0 +1,1271 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Sirawit Putpat" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://example.com/post/07_explore_waymo_perception/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cf95f60f117dde1881b54a0e41ebb5ec.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://example.com/post/07_explore_waymo_perception/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="" />
+  <meta property="og:url" content="https://example.com/post/07_explore_waymo_perception/" />
+  <meta property="og:title" content="Waymo Open Dataset | " />
+  <meta property="og:description" content="The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on." /><meta property="og:image" content="https://example.com/post/07_explore_waymo_perception/featured.png" />
+    <meta property="twitter:image" content="https://example.com/post/07_explore_waymo_perception/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-06-21T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-06-21T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/07_explore_waymo_perception/"
+  },
+  "headline": "Waymo Open Dataset",
+  
+  "image": [
+    "https://example.com/post/07_explore_waymo_perception/featured.png"
+  ],
+  
+  "datePublished": "2021-06-21T00:00:00Z",
+  "dateModified": "2021-06-21T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sirawit Putpat"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Waymo Open Dataset | </title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="92592a1703d4d9d2315f0f7474cb68c4" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>Gallery</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Waymo Open Dataset</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 21, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 675px;">
+  <div style="position: relative">
+    <img src="/post/07_explore_waymo_perception/featured_hu81a35f21ff0d29e2e961ad2f4006d804_7720791_1200x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  
+
+      <div class="article-container">
+
+        <div class="article-style">
+          <blockquote>
+<p>The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on.</p>
+</blockquote>
+<p>The above is the takeaway, summarized by <a href="https://twitter.com/chipro/status/1407890489697652741" target="_blank" rel="noopener">Chip Huyen</a>, from a CVPR 2021 talk by Andrej Karpathy, the Director of AI at Tesla. Not surprisingly, Tesla, among other big plyers like Waymo and Cruise, is one of companies that stands out from its competition.</p>
+<p>Waymo, another big player, has released its dataset since 2019. The dataset is in <a href="https://www.tensorflow.org/tutorials/load_data/tfrecord" target="_blank" rel="noopener">TFRecord</a> format, which requires TensorFlow for reading. This makes the tools and data preprocessing pipeline heavily depend on TensorFlow. If we look at KITTI, Lyft, TRI, or Argoverse, all of these release their dataset in a raw, simple format. As someone who used PyTorch more than TensorFlow back in those days, it was a pain inspecting and debugging the <a href="https://www.tensorflow.org/guide/data" target="_blank" rel="noopener"><code>tf.data</code></a> stuff, when eager execution <em>was</em> not available inside <code>tf.data</code>.</p>
+<p>Looking at this a year later, and especially having listened to Andrej Karpathy&rsquo;s CVPR 2021 talk, I start to appreciate and I could probably see why Google&rsquo;s Waymo has released their dataset in <code>TFRecord</code> format. (Ironically though, if I remember correctly, the winner of the Challenge used PyTorch.)</p>
+<p>The good news is&hellip; we can now use:</p>
+<pre><code class="language-python"># TensorFlow 2.5
+tf.data.experimental.enable_debug_mode()
+</code></pre>
+<p>Enough for the introduction, let&rsquo;s visualize the data.</p>
+<h2 id="visualizing-camera-data">Visualizing Camera Data</h2>
+<p>Most of the code is straightforward.</p>
+<pre><code class="language-python">import tensorflow as tf
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+
+# Replace FILENAME with tfrecord file
+dataset = tf.data.TFRecordDataset(FILENAME, compression_type='')
+for data in dataset:
+    frame = open_dataset.Frame()
+    frame.ParseFromString(bytearray(data.numpy()))
+    plt.figure()
+    # Draw the camera labels.
+    count = 0
+    for camera_image in frame.images:
+        for camera_labels in frame.camera_labels:
+            # Ignore camera labels that do not correspond to this camera.
+            if camera_labels.name != camera_image.name:
+                continue
+            count += 1
+            ax = plt.subplot(2, 3, count)
+            # Iterate over the individual labels.
+            for label in camera_labels.labels:
+                # Draw the object bounding box.
+                ax.add_patch(patches.Rectangle(
+                    xy=(label.box.center_x - 0.5 * label.box.length,
+                        label.box.center_y - 0.5 * label.box.width),
+                    width=label.box.length,
+                    height=label.box.width,
+                    linewidth=1,
+                    edgecolor='red',
+                    facecolor='none'))
+            # Show the camera image.
+            plt.imshow(tf.image.decode_jpeg(camera_image.image))
+            plt.title(camera_image.name))
+            plt.grid(False)
+            plt.axis('off')
+    plt.show()
+    plt.close()
+</code></pre>
+<br>
+<p>The following shows some of the dataset.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/inUtJcAszXI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/S4ZGBSAm7uo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/h8X3_4qeGI4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/UwI7cWSBmLo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+<h2 id="dataset-statistics">Dataset Statistics</h2>
+<h3 id="3d-labels">3D Labels</h3>
+
+
+<div id="chart-248579361" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./lwh_3d_waymo.json", function(chart) {
+        Plotly.plot('chart-248579361', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+
+
+<div id="chart-283794156" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./histogram_l.json", function(chart) {
+        Plotly.plot('chart-283794156', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+
+
+<div id="chart-274598613" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./histogram_w.json", function(chart) {
+        Plotly.plot('chart-274598613', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+
+
+<div id="chart-872149536" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./histogram_h.json", function(chart) {
+        Plotly.plot('chart-872149536', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+<h3 id="2d-labels">2D Labels</h3>
+
+
+<div id="chart-471936582" class="chart"></div>
+<script>
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === 'undefined' ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json("./bbox_compare.json", function(chart) {
+        Plotly.plot('chart-471936582', chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+</script>
+
+        </div>
+
+        
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/deep-learning/">Deep Learning</a>
+  
+  <a class="badge badge-light" href="/tag/machine-learning/">Machine Learning</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://example.com/post/07_explore_waymo_perception/&amp;text=Waymo%20Open%20Dataset" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://example.com/post/07_explore_waymo_perception/&amp;t=Waymo%20Open%20Dataset" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://example.com/post/07_explore_waymo_perception/&amp;title=Waymo%20Open%20Dataset" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/09_automl/">EfficientDet: Towards Scalable Architecture in AutoML</a></li>
+      
+      <li><a href="/post/08_darts/">DARTS: Differentiable Architecture Search</a></li>
+      
+      <li><a href="/post/05_data_sci_pttep_arv/">Data Science &amp; Machine Learning In Oil And Gas Industry</a></li>
+      
+      <li><a href="/post/10_fb_ranking/">Facebook’s News Feed ranking algorithm</a></li>
+      
+      <li><a href="/project/06_recsys_dl/">Deep Learning based Recommender System</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+      </div>
+
+  
+
+</article>
+    
+
+
+
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cpp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cmake.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/xml.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.58.5/plotly.min.js" integrity="sha512-7wMLZxKDFvReIWPUzBfcEKsuOriDUEcWkV2bNHV2/tQUmoZj2eLpkQOF7nBbtwVG8WrSl5rTN87cqnS7ZelhzQ==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.8859d3cf6e5d748215fea2814e2e9c7f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

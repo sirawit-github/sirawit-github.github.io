@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning | </title>
+    <link>https://example.com/tag/deep-learning/</link>
+      <atom:link href="https://example.com/tag/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Deep Learning</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 10 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Deep Learning</title>
+      <link>https://example.com/tag/deep-learning/</link>
+    </image>
+    
+    <item>
+      <title>EfficientDet: Towards Scalable Architecture in AutoML</title>
+      <link>https://example.com/post/09_automl/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/09_automl/</guid>
+      <description>&lt;h2 id=&#34;anchor-boxes&#34;&gt;Anchor Boxes&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_3.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_4.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_5.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_6.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_7.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;data-pipeline&#34;&gt;Data Pipeline&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_original.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_resize.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mingxing Tan, Ruoming Pang, Quoc V. Le. &lt;a href=&#34;https://arxiv.org/abs/1911.09070&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EfficientDet: Scalable and Efficient Object Detection&lt;/a&gt;. CVPR 2020.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DARTS: Differentiable Architecture Search</title>
+      <link>https://example.com/post/08_darts/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/08_darts/</guid>
+      <description>&lt;p&gt;Differentiable Architecture Search&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+&amp;amp;&amp;amp; \min_{\alpha} &amp;amp;&amp;amp;&amp;amp; \mathcal{L}_{val} (w^{\ast} (\alpha), \alpha) \\&lt;br&gt;
+&amp;amp;&amp;amp; \text{s.t.}   &amp;amp;&amp;amp;&amp;amp; w^{\ast} (\alpha) = \text{argmin}_{w} \space \mathcal{L}_{train} (w, \alpha) \\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Waymo Open Dataset</title>
+      <link>https://example.com/post/07_explore_waymo_perception/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/07_explore_waymo_perception/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The above is the takeaway, summarized by &lt;a href=&#34;https://twitter.com/chipro/status/1407890489697652741&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chip Huyen&lt;/a&gt;, from a CVPR 2021 talk by Andrej Karpathy, the Director of AI at Tesla. Not surprisingly, Tesla, among other big plyers like Waymo and Cruise, is one of companies that stands out from its competition.&lt;/p&gt;
+&lt;p&gt;Waymo, another big player, has released its dataset since 2019. The dataset is in &lt;a href=&#34;https://www.tensorflow.org/tutorials/load_data/tfrecord&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TFRecord&lt;/a&gt; format, which requires TensorFlow for reading. This makes the tools and data preprocessing pipeline heavily depend on TensorFlow. If we look at KITTI, Lyft, TRI, or Argoverse, all of these release their dataset in a raw, simple format. As someone who used PyTorch more than TensorFlow back in those days, it was a pain inspecting and debugging the &lt;a href=&#34;https://www.tensorflow.org/guide/data&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;tf.data&lt;/code&gt;&lt;/a&gt; stuff, when eager execution &lt;em&gt;was&lt;/em&gt; not available inside &lt;code&gt;tf.data&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Looking at this a year later, and especially having listened to Andrej Karpathy&amp;rsquo;s CVPR 2021 talk, I start to appreciate and I could probably see why Google&amp;rsquo;s Waymo has released their dataset in &lt;code&gt;TFRecord&lt;/code&gt; format. (Ironically though, if I remember correctly, the winner of the Challenge used PyTorch.)&lt;/p&gt;
+&lt;p&gt;The good news is&amp;hellip; we can now use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# TensorFlow 2.5
+tf.data.experimental.enable_debug_mode()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Enough for the introduction, let&amp;rsquo;s visualize the data.&lt;/p&gt;
+&lt;h2 id=&#34;visualizing-camera-data&#34;&gt;Visualizing Camera Data&lt;/h2&gt;
+&lt;p&gt;Most of the code is straightforward.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow as tf
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+
+# Replace FILENAME with tfrecord file
+dataset = tf.data.TFRecordDataset(FILENAME, compression_type=&#39;&#39;)
+for data in dataset:
+    frame = open_dataset.Frame()
+    frame.ParseFromString(bytearray(data.numpy()))
+    plt.figure()
+    # Draw the camera labels.
+    count = 0
+    for camera_image in frame.images:
+        for camera_labels in frame.camera_labels:
+            # Ignore camera labels that do not correspond to this camera.
+            if camera_labels.name != camera_image.name:
+                continue
+            count += 1
+            ax = plt.subplot(2, 3, count)
+            # Iterate over the individual labels.
+            for label in camera_labels.labels:
+                # Draw the object bounding box.
+                ax.add_patch(patches.Rectangle(
+                    xy=(label.box.center_x - 0.5 * label.box.length,
+                        label.box.center_y - 0.5 * label.box.width),
+                    width=label.box.length,
+                    height=label.box.width,
+                    linewidth=1,
+                    edgecolor=&#39;red&#39;,
+                    facecolor=&#39;none&#39;))
+            # Show the camera image.
+            plt.imshow(tf.image.decode_jpeg(camera_image.image))
+            plt.title(camera_image.name))
+            plt.grid(False)
+            plt.axis(&#39;off&#39;)
+    plt.show()
+    plt.close()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;br&gt;
+&lt;p&gt;The following shows some of the dataset.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/inUtJcAszXI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/S4ZGBSAm7uo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/h8X3_4qeGI4&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/UwI7cWSBmLo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;h2 id=&#34;dataset-statistics&#34;&gt;Dataset Statistics&lt;/h2&gt;
+&lt;h3 id=&#34;3d-labels&#34;&gt;3D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-248579361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./lwh_3d_waymo.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-248579361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-283794156&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_l.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-283794156&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-274598613&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_w.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-274598613&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-872149536&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_h.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-872149536&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;2d-labels&#34;&gt;2D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-471936582&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./bbox_compare.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-471936582&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Science &amp; Machine Learning In Oil And Gas Industry</title>
+      <link>https://example.com/post/05_data_sci_pttep_arv/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/05_data_sci_pttep_arv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The Oil and Gas industry is one of the most lucrative industries that has a very high operating cost. Cutting costs is therefore a major priority when it comes to this business. In this post, I share some of the mahcine learning (or data science, if you will) applications that I have worked on.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-02.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-03.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-04.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-593726814&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./pipe.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-593726814&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-176389452&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./series.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-176389452&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-385794162&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-385794162&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning based Recommender System</title>
+      <link>https://example.com/project/06_recsys_dl/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/06_recsys_dl/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/em&gt; &lt;em&gt;Some details in the dataset have been obfuscated by the provider in order to maintain the data privacy.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Modern recommendation systems are complicated. The Collaborative Filtering, which used to be the state-of-the-art approach during the Netflix Prize competition, is probably not at the forefront of the research or industry anymore. So this is my motivation to explore a more modern approach, following up from the &lt;a href=&#34;https://example.com/project/01_recommendation_system&#34;&gt;project&lt;/a&gt; that I used to work on a very long time ago when I was in the university.&lt;/p&gt;
+&lt;p&gt;Recommender systems optimize for different objectives in different contexts. In this dataset, we are interested in predicting the user engagements.&lt;/p&gt;
+&lt;h2 id=&#34;0-system-architecture&#34;&gt;0. System Architecture&lt;/h2&gt;
+&lt;h2 id=&#34;1-metrics&#34;&gt;1. Metrics&lt;/h2&gt;
+&lt;h3 id=&#34;relative-cross-entropy&#34;&gt;Relative Cross Entropy&lt;/h3&gt;
+&lt;h3 id=&#34;area-under-the-precision-recall-curve&#34;&gt;Area under the Precision Recall Curve&lt;/h3&gt;
+&lt;h2 id=&#34;2-exploratory-data-analysis&#34;&gt;2. Exploratory Data Analysis&lt;/h2&gt;
+&lt;h3 id=&#34;type&#34;&gt;Type&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/type_obfuscated.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;account-creation-time&#34;&gt;Account creation time&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-524879361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./user_creation_time.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-524879361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;user-followers&#34;&gt;User Followers&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwer.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;followings&#34;&gt;Followings&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwing.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;language&#34;&gt;Language&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-468725139&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./language.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-468725139&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h2 id=&#34;2-feature-engineering&#34;&gt;2. Feature Engineering&lt;/h2&gt;
+&lt;h2 id=&#34;3-tree-based-models&#34;&gt;3. Tree-based Models&lt;/h2&gt;
+&lt;h2 id=&#34;4-deep-learning-models&#34;&gt;4. Deep Learning Models&lt;/h2&gt;
+&lt;h3 id=&#34;ncf&#34;&gt;NCF&lt;/h3&gt;
+&lt;h3 id=&#34;deep-learning-models&#34;&gt;Deep Learning Models&lt;/h3&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Paul Covington, Jay Adams, and Emre Sargin. 2016. &lt;a href=&#34;https://research.google/pubs/pub45530/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Deep neural networks for youtube recommendations&lt;/a&gt;. In Recsys. 191–198.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Real-time 3D Object Detection from Point Clouds</title>
+      <link>https://example.com/post/02_3d_object_detection/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/02_3d_object_detection/</guid>
+      <description>&lt;h2 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h2&gt;
+&lt;h2 id=&#34;2-model-implementation&#34;&gt;2. Model Implementation&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/pixor_model.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;3-initial-results&#34;&gt;3. Initial Results&lt;/h2&gt;
+&lt;h3 id=&#34;31-single-class-detection&#34;&gt;3.1 Single Class Detection&lt;/h3&gt;
+&lt;h3 id=&#34;simple-scenes&#34;&gt;Simple Scenes&lt;/h3&gt;
+&lt;p&gt;Currently the model is trained on a single class: &lt;code&gt;car&lt;/code&gt;. For the following result, green indicates the ground truth labels, and light blue indicates the predicted results.&lt;/p&gt;
+&lt;p&gt;In a simple scene, the model seems to recognize all the car objects:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_64.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_83.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;harder&#34;&gt;Harder&lt;/h3&gt;
+&lt;p&gt;Since the model is trained using only the top view LIDAR data, it is reasonable that the model can miss the cases where thr LIDAR point cloud of the object is sparse:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/img_95_3dbox_gt.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95_sparse_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;easy-mistake&#34;&gt;Easy Mistake&lt;/h3&gt;
+&lt;p&gt;However, the model still misses some obvious detection, such as in the following scene. Here, the front car in the very middle doesn&amp;rsquo;t get detected.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/img_49_3dbox_gt.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_49.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;why-top-view&#34;&gt;Why Top View?&lt;/h3&gt;
+&lt;p&gt;What I think the top view (or bird&amp;rsquo;s eye view) approach can do well is that: It can detect the objects which are occluded in the front camera view. If we look at the following image, the car on the very right of the image is largely occluded:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/zoom.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_99_front.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;However, viewing the point cloud from the top, these 2 cars are clearly separated in the space, and therefore the model can easily detect the targeted objects:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_99_occlusion_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;32-multi-class-detection&#34;&gt;3.2 Multi-Class Detection&lt;/h3&gt;
+&lt;h2 id=&#34;4-final-results&#34;&gt;4. Final Results&lt;/h2&gt;
+&lt;h2 id=&#34;5-my-thoughts&#34;&gt;5. My Thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;6-references&#34;&gt;6. References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;H. Su, S. Maji, E. Kalogerakis, and E. G. Learned-Miller. &lt;a href=&#34;&#34;&gt;Multi-view convolutional neural networks for 3d shaperecognition&lt;/a&gt; ICCV, 2015&lt;/li&gt;
+&lt;li&gt;Bin Yang, Wenjie Luo, and Raquel Urtasun. &lt;a href=&#34;&#34;&gt;PIXOR: Real-time 3d object detection from point clouds&lt;/a&gt; CVPR, 2018&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

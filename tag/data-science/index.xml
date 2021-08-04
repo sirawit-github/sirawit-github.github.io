@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Science | </title>
+    <link>https://example.com/tag/data-science/</link>
+      <atom:link href="https://example.com/tag/data-science/index.xml" rel="self" type="application/rss+xml" />
+    <description>Data Science</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 07 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Data Science</title>
+      <link>https://example.com/tag/data-science/</link>
+    </image>
+    
+    <item>
+      <title>AI &amp; Robotics Hackathon 2021</title>
+      <link>https://example.com/post/12_arv_hackathon_2021/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/12_arv_hackathon_2021/</guid>
+      <description>&lt;p&gt;ARV Hackathon 2021 is back with the new and even more challenging problem statements that dare you to find innovative solutions in Cyber Security and Subsea Machine Learning spaces.&lt;/p&gt;
+&lt;p&gt;All tech talents, start-ups, and the next generation innovators are invited to join ARV in creating the innovative technological solutions that will transform the future of Thailand and Southeast Asia.&lt;/p&gt;
+&lt;p&gt;Stay Tuned!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Facebook’s News Feed ranking algorithm</title>
+      <link>https://example.com/post/10_fb_ranking/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/10_fb_ranking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Science &amp; Machine Learning In Oil And Gas Industry</title>
+      <link>https://example.com/post/05_data_sci_pttep_arv/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/05_data_sci_pttep_arv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The Oil and Gas industry is one of the most lucrative industries that has a very high operating cost. Cutting costs is therefore a major priority when it comes to this business. In this post, I share some of the mahcine learning (or data science, if you will) applications that I have worked on.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-02.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-03.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-04.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-593726814&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./pipe.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-593726814&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-176389452&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./series.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-176389452&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-385794162&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-385794162&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning based Recommender System</title>
+      <link>https://example.com/project/06_recsys_dl/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/06_recsys_dl/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/em&gt; &lt;em&gt;Some details in the dataset have been obfuscated by the provider in order to maintain the data privacy.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Modern recommendation systems are complicated. The Collaborative Filtering, which used to be the state-of-the-art approach during the Netflix Prize competition, is probably not at the forefront of the research or industry anymore. So this is my motivation to explore a more modern approach, following up from the &lt;a href=&#34;https://example.com/project/01_recommendation_system&#34;&gt;project&lt;/a&gt; that I used to work on a very long time ago when I was in the university.&lt;/p&gt;
+&lt;p&gt;Recommender systems optimize for different objectives in different contexts. In this dataset, we are interested in predicting the user engagements.&lt;/p&gt;
+&lt;h2 id=&#34;0-system-architecture&#34;&gt;0. System Architecture&lt;/h2&gt;
+&lt;h2 id=&#34;1-metrics&#34;&gt;1. Metrics&lt;/h2&gt;
+&lt;h3 id=&#34;relative-cross-entropy&#34;&gt;Relative Cross Entropy&lt;/h3&gt;
+&lt;h3 id=&#34;area-under-the-precision-recall-curve&#34;&gt;Area under the Precision Recall Curve&lt;/h3&gt;
+&lt;h2 id=&#34;2-exploratory-data-analysis&#34;&gt;2. Exploratory Data Analysis&lt;/h2&gt;
+&lt;h3 id=&#34;type&#34;&gt;Type&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/type_obfuscated.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;account-creation-time&#34;&gt;Account creation time&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-524879361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./user_creation_time.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-524879361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;user-followers&#34;&gt;User Followers&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwer.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;followings&#34;&gt;Followings&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwing.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;language&#34;&gt;Language&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-468725139&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./language.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-468725139&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h2 id=&#34;2-feature-engineering&#34;&gt;2. Feature Engineering&lt;/h2&gt;
+&lt;h2 id=&#34;3-tree-based-models&#34;&gt;3. Tree-based Models&lt;/h2&gt;
+&lt;h2 id=&#34;4-deep-learning-models&#34;&gt;4. Deep Learning Models&lt;/h2&gt;
+&lt;h3 id=&#34;ncf&#34;&gt;NCF&lt;/h3&gt;
+&lt;h3 id=&#34;deep-learning-models&#34;&gt;Deep Learning Models&lt;/h3&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Paul Covington, Jay Adams, and Emre Sargin. 2016. &lt;a href=&#34;https://research.google/pubs/pub45530/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Deep neural networks for youtube recommendations&lt;/a&gt;. In Recsys. 191–198.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Recommendation Algorithm using Collaborative Filtering</title>
+      <link>https://example.com/project/01_recommendation_system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/01_recommendation_system/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

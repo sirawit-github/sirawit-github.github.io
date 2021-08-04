@@ -1,0 +1,1193 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Sirawit Putpat" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Introduction This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://example.com/post/01_visual_odometry/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cf95f60f117dde1881b54a0e41ebb5ec.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://example.com/post/01_visual_odometry/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="" />
+  <meta property="og:url" content="https://example.com/post/01_visual_odometry/" />
+  <meta property="og:title" content="Visual Odometry Implementation from Scratch | " />
+  <meta property="og:description" content="Introduction This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch." /><meta property="og:image" content="https://example.com/post/01_visual_odometry/featured.png" />
+    <meta property="twitter:image" content="https://example.com/post/01_visual_odometry/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2019-10-05T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2019-10-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/post/01_visual_odometry/"
+  },
+  "headline": "Visual Odometry Implementation from Scratch",
+  
+  "image": [
+    "https://example.com/post/01_visual_odometry/featured.png"
+  ],
+  
+  "datePublished": "2019-10-05T00:00:00Z",
+  "dateModified": "2019-10-05T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sirawit Putpat"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Introduction This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Visual Odometry Implementation from Scratch | </title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="ba3bda5b31b1496abb0575a5f3c018da" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>Gallery</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Visual Odometry Implementation from Scratch</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Oct 5, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header container featured-image-wrapper mt-4 mb-4" style="max-width: 1200px; max-height: 845px;">
+  <div style="position: relative">
+    <img src="/post/01_visual_odometry/featured_hube2d77684a47c7405e5ad785644615b5_89192_1200x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  
+
+      <div class="article-container">
+
+        <div class="article-style">
+          <h2 id="introduction">Introduction</h2>
+<p>This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch. For a programming language, I choose MATLAB because it is easy-to-use and fast for prototyping a project.</p>
+<p><em><strong>Disclaimer:</strong></em> This is not a state-of-the-art implementation. This simply serves the purpose of learning.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>To give a general idea, visual odometry (VO) is an algorithm that aims to recover the path incrementally, by using the visual input from cameras, and hence the name. It can be considered as a sequential structure from motion, as opposed to hierarchical structure from motion. Imagine a robot or an agent, attached with a calibrated camera $C$, moves through an environment and receives the image continuously. The images $I_k, I_{k-1}$ are taken at different time steps $k$ and $k-1$, which corresponds to the camera pose $C_k$ and $C_{k-1}$ respectively. The task of VO is basically to retrieve the transformation matrix $T = \left[R \lvert t \right]$ that relates two camera poses, and concatenate all the transformaitons $T_k$ to get the current camera pose:</p>
+<p>$$ C_{t} = T_{t,t-1}C_{t-1}$$</p>
+<h2 id="getting-things-up--running">Getting Things Up &amp; Running</h2>
+<p>I first have an initialization function <code>vo_initialize.m</code> that takes two image frames, establishing keypoint correspondences between these two frames using KLT feature tracker, estimating relative camera pose, and finally triangulating an initial 3D point cloud landmarks. I admit that these may sound lacking of excitement (as they are something that is well understood in the computer vision community), but they are not easy to implement from scratch in a single sit.</p>
+<h3 id="feature-detection">Feature Detection</h3>
+<p>This is a simple plementation of Harris corner detector. For each pixel $(u,v)$, we calculate a score</p>
+<p>$$R = det(A_{u,v}) - {\lambda}trace^2(A_{u,v})$$</p>
+<p>where</p>
+<p>$$ A_{u,v} = \begin{bmatrix} \sum{I^2_{x}} &amp; \sum{I_{x}I_{y}}\ \sum{I_{x}I_{y}} &amp; \sum{I^2_{y}} \end{bmatrix} $$</p>
+<p>and $I_x, I_y$ are the image gradients in $x$ and $y$ direction respectively.</p>
+<pre><code class="language-matlab">I_x = conv2(img, [-1 0 1; -2 0 2; -1 0 1], 'valid');
+I_y = conv2(img, [-1 -2 -1; 0 0 0; 1 2 1], 'valid');
+I_xx = double(I_x.^2);
+I_yy = double(I_y.^2);
+I_xy = double(I_x.*I_y);
+I_xx_sum = conv2(I_xx, ones(patch_size), 'valid');
+I_yy_sum = conv2(I_yy, ones(patch_size), 'valid');
+I_xy_sum = conv2(I_xy, ones(patch_size), 'valid');
+
+pad_size = floor((patch_size+1)/2);
+scores = (I_xx_sum.*I_yy_sum - I_xy_sum.^2) - lambda*(I_xx_sum + I_yy_sum).^2;
+scores(scores &lt; 0) = 0;
+scores = padarray(scores, [pad_size pad_size]);
+</code></pre>
+<p>After calculating the score, we simply select $k$ keypoints with highest scores (with non-maximum suppression).</p>
+<pre><code class="language-matlab">scores_pad = padarray(scores, [r r]);
+score_size = size(scores_pad);
+keypoints = zeros(2, k);
+for i = 1:k
+    [~, idx] = max(scores_pad, [], 'all', 'linear');
+    [row, col] = ind2sub(score_size, idx);
+    keypoints(:, i) = [row; col] - r;
+    scores_pad(row-r:row+r, col-r:col+r) = 0;
+end
+</code></pre>
+<h3 id="klt-feature-tracker">KLT Feature Tracker</h3>
+<p>&hellip;</p>
+<pre><code class="language-matlab"></code></pre>
+<h3 id="pose-estimation">Pose Estimation</h3>
+<p>&hellip;</p>
+<pre><code class="language-matlab"></code></pre>
+<h3 id="triangulation">Triangulation</h3>
+<p>&hellip;</p>
+<pre><code class="language-matlab"></code></pre>
+<p>The result of <code>vo_initialize.m</code> seems reasonable. Good to go!</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/post/01/post.png" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="problems-from-previous-implementation">Problems from Previous Implementation</h2>
+<p>&hellip;</p>
+<h2 id="estimate-world-camera-pose">Estimate World Camera Pose</h2>
+<p>&hellip;</p>
+<pre><code class="language-matlab"></code></pre>
+<h2 id="bundle-adjustment">Bundle Adjustment</h2>
+<p>Bundle adjustment is a very cool concept. To put it simply, it is an optimization algorithm used to refine the estimated trajectory.</p>
+<p>In this implementation, a <em>motion-only</em> bundle adjustment is implemented, which optimizes only the camera orientation $R$ and position $t$. This implies that</p>
+<pre><code class="language-matlab"></code></pre>
+<h2 id="results">Results</h2>
+<p>Putting it all together, the <code>vo_initialize.m</code> function initializes the VO pipeline, creating initial 3D point landmarks, extracting initial keypoints, and estimating the initial pose of the camera. The <code>vo_process.m</code> sequentially extracting and tracking image features from an image frame, across frames, and simultaneously estimating the pose of the camera. Bundle adjustment is also implemented to refine the estimated pose at each step. Lastly, new 3D points are regularly created as the number of currently tracked keypoints is shrinking over time. The following is the final result.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/A5HnnSiZ_LM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+<p>From the video, it is obvious that this is not a state-of-the-art implementation. There are various components that are not implemented. As we can see, the estimated trajectory starts to deviate from the ground truth after some time, due to the scale drift&ndash;a common problem in monocular VO. The estimated trajetory also wiggles slightly, probaly due to the fact that the full bundle adjustment is not implemented. And the most importantly, I did not try to implement a loop closure.</p>
+<h2 id="reflections">Reflections</h2>
+<p>The task of implementing VO from scratch may sound lacking of excitement. I believe that the conventional pipeline of VO and SLAM is something that is already well-understood in the computer vision community. What I realize is that academic papers usually have missing steps that are left for the readers to figure out. Here, I tried to connect those steps and the result stands as a self-assesment of my understanding.</p>
+
+        </div>
+
+        
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/robotics/">Robotics</a>
+  
+  <a class="badge badge-light" href="/tag/computer-vision/">Computer Vision</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://example.com/post/01_visual_odometry/&amp;text=Visual%20Odometry%20Implementation%20from%20Scratch" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://example.com/post/01_visual_odometry/&amp;t=Visual%20Odometry%20Implementation%20from%20Scratch" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://example.com/post/01_visual_odometry/&amp;title=Visual%20Odometry%20Implementation%20from%20Scratch" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/12_arv_hackathon_2021/">AI &amp; Robotics Hackathon 2021</a></li>
+      
+      <li><a href="/post/06_cuda_basic/">Fast Execution with CUDA!</a></li>
+      
+      <li><a href="/post/04_sonar_sim/">Custom Sonar Simulation in Gazebo</a></li>
+      
+      <li><a href="/post/03_the_quest_to_build_auv/">The Quest to Build an Autonomous Underwater Vehicle</a></li>
+      
+      <li><a href="/project/05_monocular_slam_deep_learning/">Monocular SLAM with Deep Learning</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+      </div>
+
+  
+
+</article>
+    
+
+
+
+
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cpp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cmake.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/xml.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.8859d3cf6e5d748215fea2814e2e9c7f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

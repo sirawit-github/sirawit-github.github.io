@@ -1,0 +1,1283 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Sirawit Putpat" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://example.com/project/02_ball_robot/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/github-dark.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lora&family=Work+Sans&family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.cf95f60f117dde1881b54a0e41ebb5ec.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://example.com/project/02_ball_robot/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="" />
+  <meta property="og:url" content="https://example.com/project/02_ball_robot/" />
+  <meta property="og:title" content="Autonomous Ball-Collecting Robot using Reinforcement Learning | " />
+  <meta property="og:description" content="This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor." /><meta property="og:image" content="https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png" />
+    <meta property="twitter:image" content="https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2018-08-01T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2018-08-01T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/project/02_ball_robot/"
+  },
+  "headline": "Autonomous Ball-Collecting Robot using Reinforcement Learning",
+  
+  "datePublished": "2018-08-01T00:00:00Z",
+  "dateModified": "2018-08-01T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Sirawit Putpat"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Autonomous Ball-Collecting Robot using Reinforcement Learning | </title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c2b7523c0a20b2b810036418b20b094f" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#gallery"><span>Gallery</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article article-project">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Autonomous Ball-Collecting Robot using Reinforcement Learning</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 1, 2018
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  
+  <div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+  
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#optimal-policy-and-optimal-value-functions">Optimal Policy and Optimal Value Functions</a></li>
+    <li><a href="#monte-carlo-methods">Monte Carlo Methods</a></li>
+    <li><a href="#q-learning">Q-Learning</a></li>
+    <li><a href="#q-network">Q-Network</a></li>
+    <li><a href="#experience-replay">Experience Replay</a></li>
+    <li><a href="#separated-networks">Separated Networks</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+        
+      </div>
+  
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor. The algorithms were implemented on <a href="https://www.intel.com/content/www/us/en/products/details/nuc.html" target="_blank" rel="noopener">Intel NUC</a> and <a href="https://developer.nvidia.com/embedded/jetson-tx2" target="_blank" rel="noopener">Nvidia Jetson TX2</a> board.</p>
+<p>This is my attempt at re-writing a write-up because a lot of recruiters ask me how the project was done and I sometimes forget (it was done in 2018).</p>
+<br>
+<h2 id="optimal-policy-and-optimal-value-functions">Optimal Policy and Optimal Value Functions</h2>
+<p><strong>Bellman optimality equation</strong></p>
+<p>For optimal value function $v_{*}$:</p>
+<p>$$
+\begin{aligned}
+v_{*}(s) &amp;= \max_{a} E \left[ R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_{t}=s, A_{t}=a \right] \\<br>
+&amp;= \max_{a} \sum_{s',r} p(s',r \vert s,a) \left[ r + \gamma  v_{*}(s') \right]
+\end{aligned}
+$$</p>
+<p>For optimal action-value function $q_{*}$:</p>
+<p>$$
+\begin{aligned}
+q_{*}(s,a) &amp;= E \left[ R_{t+1} + \gamma \max_{a'} q_{*}(S_{t+1}, a') \vert S_{t} = s, A_{t} = a \right] \\<br>
+&amp;= \sum_{s',r} p(s',r \vert s,a) \left[ r + \gamma \max_{a'} q_{*}(s',a') \right]
+\end{aligned}
+$$</p>
+<h2 id="monte-carlo-methods">Monte Carlo Methods</h2>
+<p>Monte Carlo methods only require a sample of states, actions, and rewards from interaction between the agent and the environment. It is model-free; the probability distributions such as state-transition $p(s' \vert s,a)$ need not to be known.</p>
+<h2 id="q-learning">Q-Learning</h2>
+<p>$$ Q(s,a) \leftarrow (1-\alpha)Q(s,a) + \alpha \left[ r + \gamma \max_{a'} Q(s',a') \right] $$</p>
+<pre><code>Initialize Q(s, a)
+Start with state &quot;s&quot;
+Loop:
+    Select action &quot;a&quot; with e-greedy
+    Execute action &quot;a&quot;, receive immediate reward &quot;r&quot; and go to state &quot;s'&quot;
+    Q(s, a) = Q(s, a) + alpha*[r + gamma * max{Q(s', a')} - Q(s, a)]
+</code></pre>
+<p>But what if the number of $(s,a)$ pairs are very big? Then it is not practical to keep the table $Q$ for every pair of $(s,a)$. Instead, we could maintain $Q(s,a)$ as a parameterized function. This is where the neural network comes into play.</p>
+<h2 id="q-network">Q-Network</h2>
+<p><strong>Training</strong></p>
+<p>We define the <strong>loss</strong> as:</p>
+<p>$$
+L(\theta) = \left( \left( r + \gamma \max_{a'} {Q(s', a' | \theta }) \right) - Q(s,a|\theta) \right)^2
+$$</p>
+<p>Our objective is to find weight $\theta$ of the network to minimize the loss:</p>
+<p>$$
+\min_{\theta} L(\theta) = \min_{\theta} \left[ \left( r + \gamma \max_{a'} {Q(s', a' | \theta }) - Q(s,a|\theta) \right)^2 \right]
+$$</p>
+<p>where $r$ is the immediate reward that we observe and the term $r + \gamma \max_{a'} {Q(s', a' | \theta })$ is the approximated target.</p>
+<p><strong>Convergence</strong></p>
+<p>However, using a neural network to represent the action-value function tends to be unstable due to:</p>
+<ul>
+<li>Correlations between samples</li>
+<li>Non-stationary targets</li>
+</ul>
+<p>How does DeepMind solve this issue?</p>
+<ul>
+<li>Experience replay</li>
+<li>Separated networks</li>
+<li>Go deeper (added by myself)</li>
+</ul>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/02/go_deeper.jpg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="experience-replay">Experience Replay</h2>
+<h2 id="separated-networks">Separated Networks</h2>
+<p>$$
+L(\theta) = \left( \left( r + \gamma \max_{a'} {Q(s', a' | \theta^{-} }) \right) - Q(s,a|\theta) \right)^2
+$$</p>
+<br>
+<h2 id="gallery">Gallery</h2>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/02/1.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/02/2.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/02/3.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="/image/project/02/4.jpeg" alt="" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Mnih, V. et al. <a href="https://deepmind.com/research/publications/2019/human-level-control-through-deep-reinforcement-learning" target="_blank" rel="noopener">Human-level control through deep reinforcement learning.</a> Nature 518, 529–533 (2015).</li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/robotics/">Robotics</a>
+  
+  <a class="badge badge-light" href="/tag/reinforcement-learning/">Reinforcement Learning</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://example.com/project/02_ball_robot/&amp;text=Autonomous%20Ball-Collecting%20Robot%20using%20Reinforcement%20Learning" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://example.com/project/02_ball_robot/&amp;t=Autonomous%20Ball-Collecting%20Robot%20using%20Reinforcement%20Learning" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://example.com/project/02_ball_robot/&amp;title=Autonomous%20Ball-Collecting%20Robot%20using%20Reinforcement%20Learning" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/12_arv_hackathon_2021/">AI &amp; Robotics Hackathon 2021</a></li>
+      
+      <li><a href="/post/03_the_quest_to_build_auv/">The Quest to Build an Autonomous Underwater Vehicle</a></li>
+      
+      <li><a href="/project/05_monocular_slam_deep_learning/">Monocular SLAM with Deep Learning</a></li>
+      
+      <li><a href="/post/01_visual_odometry/">Visual Odometry Implementation from Scratch</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    </div>
+  </div>
+
+  
+    </div>
+  </div>
+  
+
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cpp.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/matlab.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/cmake.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/xml.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.8859d3cf6e5d748215fea2814e2e9c7f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

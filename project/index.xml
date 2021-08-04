@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | </title>
+    <link>https://example.com/project/</link>
+      <atom:link href="https://example.com/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>https://example.com/project/</link>
+    </image>
+    
+    <item>
+      <title>Continuous Training with TFX and Kubeflow Pipelines</title>
+      <link>https://example.com/project/07_tfx_google_ai_platform/</link>
+      <pubDate>Sun, 10 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/07_tfx_google_ai_platform/</guid>
+      <description>&lt;p&gt;In this post I will be exploring the TFX and its integration with Kubeflow Pipelines on Google AI Platform.&lt;/p&gt;
+&lt;p&gt;This post is kind of my summarization for my learning purpose.&lt;/p&gt;
+&lt;h2 id=&#34;1-dataset&#34;&gt;1. Dataset&lt;/h2&gt;
+&lt;h2 id=&#34;2-create-clusters&#34;&gt;2. Create Clusters&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/04.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/05.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/06.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;3-understanding-tfx-pipelines&#34;&gt;3. Understanding TFX Pipelines&lt;/h2&gt;
+&lt;p&gt;In order to understand TFX pipelines, we need to understand some keywords. For full tutorial, refer to TensorFlow&amp;rsquo;s article &lt;a href=&#34;https://www.tensorflow.org/tfx/guide/understanding_tfx_pipelines&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;artifact&#34;&gt;Artifact&lt;/h3&gt;
+&lt;p&gt;Artifacts are the output of the steps in a TFX pipeline. They can be used by subsequent steps in the pipeline.&lt;/p&gt;
+&lt;p&gt;Artifacts must be stongly typed with an &lt;strong&gt;artifact type&lt;/strong&gt; registered in the &lt;a href=&#34;https://www.tensorflow.org/tfx/guide/mlmd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ML Metadata&lt;/a&gt; store. This point is not very clear yet; I need to research and will come back to expand more on this later.&lt;/p&gt;
+&lt;p&gt;Questions&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Where does artifact get stored?&lt;/li&gt;
+&lt;li&gt;What needs to be changed if we run the pipeline on a Cloud?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;parameter&#34;&gt;Parameter&lt;/h3&gt;
+&lt;p&gt;Parameters are something that we can set through configuration, instead of hard coding; they are just like the hyperparameters of a ML/DL model.&lt;/p&gt;
+&lt;h3 id=&#34;component&#34;&gt;Component&lt;/h3&gt;
+&lt;p&gt;Component is an implementation of the task in our pipeline. Components in TFX are composed of&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Component specification&lt;/strong&gt;: This defines the component&amp;rsquo;s input and output artifacts, and component&amp;rsquo;s parameters.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Executor&lt;/strong&gt;: This implements the real work of a step in the pipeline.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Component interface&lt;/strong&gt;: This packages the component specification and executor for use in a pipeline. (This is not very clear.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Questions&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Where does the component get run?&lt;/li&gt;
+&lt;li&gt;Do components run in the same environment? Same OS and same dependencies?&lt;/li&gt;
+&lt;li&gt;What if each component requires different dependencies?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pipeline&#34;&gt;Pipeline&lt;/h3&gt;
+&lt;p&gt;TensorFlow says that a TFX pipeline is a &lt;em&gt;&lt;strong&gt;portable&lt;/strong&gt;&lt;/em&gt; implementation of an ML workflow, as it can be run on different ochestrators, such as: Apache Airflow, Apache Beam, and Kubeflow Pipelines.&lt;/p&gt;
+&lt;p&gt;First, we build a pipeline, which is of type &lt;code&gt;tfx.orchestration.pipeline.Pipeline&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tfx.orchestration import pipeline
+
+def _create_pipeline() -&amp;gt; pipeline.Pipeline:
+    &amp;quot;&amp;quot;&amp;quot;
+    &amp;quot;&amp;quot;&amp;quot;
+    pass
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To select a different ochestration tool, we need to import from &lt;code&gt;tfx.orchestration&lt;/code&gt; module.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Airflow
+from tfx.orchestration.airflow.airflow_dag_runner import AirflowDagRunner
+from tfx.orchestration.airflow.airflow_dag_runner import AirflowPipelineConfig
+
+DAG = AirflowDagRunner(AirflowPipelineConfig()).run(
+          _create_pipeline()
+      )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Kubeflow
+from tfx.orchestration.kubeflow import kubeflow_dag_runner
+
+kubeflow_dag_runner.KubeflowDagRunner().run(
+    create_pipeline()
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;4-tfx-custom-components&#34;&gt;4. TFX Custom Components&lt;/h2&gt;
+&lt;p&gt;Understanding the custom components will get us far! Refer to TensorFlow&amp;rsquo;s article &lt;a href=&#34;https://www.tensorflow.org/tfx/guide/understanding_custom_components&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;tfx-components-at-runtime&#34;&gt;TFX components at runtime&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When a pipeline runs a TFX component, the component is executed in three phases:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, the Driver uses the component specification to retrieve the required artifacts from the metadata store and pass them into the component.&lt;/li&gt;
+&lt;li&gt;Next, the Executor performs the component&amp;rsquo;s work.&lt;/li&gt;
+&lt;li&gt;Then the Publisher uses the component specification and the results from the executor to store the component&amp;rsquo;s outputs in the metadata store.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/component.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;types-of-custom-components&#34;&gt;Types of custom components&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Python function-based&lt;/strong&gt; components&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The specification is completely defined in the Python code.&lt;/li&gt;
+&lt;li&gt;The function&amp;rsquo;s arguments with type annotations describe input artifact, output artifact, and parameters.&lt;/li&gt;
+&lt;li&gt;The function&amp;rsquo;s body defines the component&amp;rsquo;s executor.&lt;/li&gt;
+&lt;li&gt;The component interface is dedined by adding &lt;code&gt;@component&lt;/code&gt; decorator.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;@component
+def MyComponent(
+        model: InputArtifact[Model],
+        output: OutputArtifact[Model],
+        threshold: Parameter[int] = 10
+    ) -&amp;gt; OutputDict(accuracy=float):
+    &amp;quot;&amp;quot;&amp;quot;
+    &amp;quot;&amp;quot;&amp;quot;
+    pass
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Container-based&lt;/strong&gt; components&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This is suitable for building a component with custom runtime environment and dependencies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fully custom&lt;/strong&gt; components&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This is for building a component that is not in the built-in TFX standard components.&lt;/li&gt;
+&lt;li&gt;It lets us build a component by implementing a custom &lt;em&gt;component specification&lt;/em&gt;, &lt;em&gt;executor&lt;/em&gt;, and &lt;em&gt;component interface&lt;/em&gt; classes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;5-code&#34;&gt;5. Code&lt;/h2&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;6-pipeline-dashboard&#34;&gt;6. Pipeline Dashboard&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/10.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/11.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/13.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/15_2.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/16_2.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/17_1.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/17_2.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;7-dataflow&#34;&gt;7. Dataflow&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/19.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/20.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/21.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/22.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/07/24.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;my-thoughts&#34;&gt;My Thoughts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TFX seems to be built around TensorFlow. Not very sure if it&amp;rsquo;s gonna work with other DL/ML libraries without heavily modifying the TFX components. But if we are in a Google Cloud/TensorFlow ecosystem, stick with it!.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unlike TFX, MLFlow seems to be more general and more open to other DL/ML libraries.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.tensorflow.org/tfx/tutorials&#34;&gt;https://www.tensorflow.org/tfx/tutorials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.tensorflow.org/tfx/guide/mlmd&#34;&gt;https://www.tensorflow.org/tfx/guide/mlmd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning based Recommender System</title>
+      <link>https://example.com/project/06_recsys_dl/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/06_recsys_dl/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/em&gt; &lt;em&gt;Some details in the dataset have been obfuscated by the provider in order to maintain the data privacy.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Modern recommendation systems are complicated. The Collaborative Filtering, which used to be the state-of-the-art approach during the Netflix Prize competition, is probably not at the forefront of the research or industry anymore. So this is my motivation to explore a more modern approach, following up from the &lt;a href=&#34;https://example.com/project/01_recommendation_system&#34;&gt;project&lt;/a&gt; that I used to work on a very long time ago when I was in the university.&lt;/p&gt;
+&lt;p&gt;Recommender systems optimize for different objectives in different contexts. In this dataset, we are interested in predicting the user engagements.&lt;/p&gt;
+&lt;h2 id=&#34;0-system-architecture&#34;&gt;0. System Architecture&lt;/h2&gt;
+&lt;h2 id=&#34;1-metrics&#34;&gt;1. Metrics&lt;/h2&gt;
+&lt;h3 id=&#34;relative-cross-entropy&#34;&gt;Relative Cross Entropy&lt;/h3&gt;
+&lt;h3 id=&#34;area-under-the-precision-recall-curve&#34;&gt;Area under the Precision Recall Curve&lt;/h3&gt;
+&lt;h2 id=&#34;2-exploratory-data-analysis&#34;&gt;2. Exploratory Data Analysis&lt;/h2&gt;
+&lt;h3 id=&#34;type&#34;&gt;Type&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/type_obfuscated.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;account-creation-time&#34;&gt;Account creation time&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-524879361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./user_creation_time.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-524879361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;user-followers&#34;&gt;User Followers&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwer.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;followings&#34;&gt;Followings&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/06/count_follwing.svg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;language&#34;&gt;Language&lt;/h3&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-468725139&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./language.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-468725139&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h2 id=&#34;2-feature-engineering&#34;&gt;2. Feature Engineering&lt;/h2&gt;
+&lt;h2 id=&#34;3-tree-based-models&#34;&gt;3. Tree-based Models&lt;/h2&gt;
+&lt;h2 id=&#34;4-deep-learning-models&#34;&gt;4. Deep Learning Models&lt;/h2&gt;
+&lt;h3 id=&#34;ncf&#34;&gt;NCF&lt;/h3&gt;
+&lt;h3 id=&#34;deep-learning-models&#34;&gt;Deep Learning Models&lt;/h3&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Paul Covington, Jay Adams, and Emre Sargin. 2016. &lt;a href=&#34;https://research.google/pubs/pub45530/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Deep neural networks for youtube recommendations&lt;/a&gt;. In Recsys. 191–198.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Monocular SLAM with Deep Learning</title>
+      <link>https://example.com/project/05_monocular_slam_deep_learning/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/05_monocular_slam_deep_learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Autonomous Ball-Collecting Robot using Reinforcement Learning</title>
+      <link>https://example.com/project/02_ball_robot/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/02_ball_robot/</guid>
+      <description>&lt;p&gt;This is a project where we used reinforcement learning to train the robot to collect balls in a simple environment. The robot is a 4-Mecanum wheeled robot equipped with a camera and a 2D LiDAR sensor. The algorithms were implemented on &lt;a href=&#34;https://www.intel.com/content/www/us/en/products/details/nuc.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Intel NUC&lt;/a&gt; and &lt;a href=&#34;https://developer.nvidia.com/embedded/jetson-tx2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nvidia Jetson TX2&lt;/a&gt; board.&lt;/p&gt;
+&lt;p&gt;This is my attempt at re-writing a write-up because a lot of recruiters ask me how the project was done and I sometimes forget (it was done in 2018).&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;optimal-policy-and-optimal-value-functions&#34;&gt;Optimal Policy and Optimal Value Functions&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Bellman optimality equation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For optimal value function $v_{*}$:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+v_{*}(s) &amp;amp;= \max_{a} E \left[ R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_{t}=s, A_{t}=a \right] \\&lt;br&gt;
+&amp;amp;= \max_{a} \sum_{s&#39;,r} p(s&#39;,r \vert s,a) \left[ r + \gamma  v_{*}(s&#39;) \right]
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;For optimal action-value function $q_{*}$:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+q_{*}(s,a) &amp;amp;= E \left[ R_{t+1} + \gamma \max_{a&#39;} q_{*}(S_{t+1}, a&#39;) \vert S_{t} = s, A_{t} = a \right] \\&lt;br&gt;
+&amp;amp;= \sum_{s&#39;,r} p(s&#39;,r \vert s,a) \left[ r + \gamma \max_{a&#39;} q_{*}(s&#39;,a&#39;) \right]
+\end{aligned}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;monte-carlo-methods&#34;&gt;Monte Carlo Methods&lt;/h2&gt;
+&lt;p&gt;Monte Carlo methods only require a sample of states, actions, and rewards from interaction between the agent and the environment. It is model-free; the probability distributions such as state-transition $p(s&#39; \vert s,a)$ need not to be known.&lt;/p&gt;
+&lt;h2 id=&#34;q-learning&#34;&gt;Q-Learning&lt;/h2&gt;
+&lt;p&gt;$$ Q(s,a) \leftarrow (1-\alpha)Q(s,a) + \alpha \left[ r + \gamma \max_{a&#39;} Q(s&#39;,a&#39;) \right] $$&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Initialize Q(s, a)
+Start with state &amp;quot;s&amp;quot;
+Loop:
+    Select action &amp;quot;a&amp;quot; with e-greedy
+    Execute action &amp;quot;a&amp;quot;, receive immediate reward &amp;quot;r&amp;quot; and go to state &amp;quot;s&#39;&amp;quot;
+    Q(s, a) = Q(s, a) + alpha*[r + gamma * max{Q(s&#39;, a&#39;)} - Q(s, a)]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But what if the number of $(s,a)$ pairs are very big? Then it is not practical to keep the table $Q$ for every pair of $(s,a)$. Instead, we could maintain $Q(s,a)$ as a parameterized function. This is where the neural network comes into play.&lt;/p&gt;
+&lt;h2 id=&#34;q-network&#34;&gt;Q-Network&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Training&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;We define the &lt;strong&gt;loss&lt;/strong&gt; as:&lt;/p&gt;
+&lt;p&gt;$$
+L(\theta) = \left( \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta }) \right) - Q(s,a|\theta) \right)^2
+$$&lt;/p&gt;
+&lt;p&gt;Our objective is to find weight $\theta$ of the network to minimize the loss:&lt;/p&gt;
+&lt;p&gt;$$
+\min_{\theta} L(\theta) = \min_{\theta} \left[ \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta }) - Q(s,a|\theta) \right)^2 \right]
+$$&lt;/p&gt;
+&lt;p&gt;where $r$ is the immediate reward that we observe and the term $r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta })$ is the approximated target.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Convergence&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;However, using a neural network to represent the action-value function tends to be unstable due to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Correlations between samples&lt;/li&gt;
+&lt;li&gt;Non-stationary targets&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How does DeepMind solve this issue?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Experience replay&lt;/li&gt;
+&lt;li&gt;Separated networks&lt;/li&gt;
+&lt;li&gt;Go deeper (added by myself)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/go_deeper.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;experience-replay&#34;&gt;Experience Replay&lt;/h2&gt;
+&lt;h2 id=&#34;separated-networks&#34;&gt;Separated Networks&lt;/h2&gt;
+&lt;p&gt;$$
+L(\theta) = \left( \left( r + \gamma \max_{a&#39;} {Q(s&#39;, a&#39; | \theta^{-} }) \right) - Q(s,a|\theta) \right)^2
+$$&lt;/p&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;gallery&#34;&gt;Gallery&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/1.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/2.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/3.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/project/02/4.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mnih, V. et al. &lt;a href=&#34;https://deepmind.com/research/publications/2019/human-level-control-through-deep-reinforcement-learning&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Human-level control through deep reinforcement learning.&lt;/a&gt; Nature 518, 529–533 (2015).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Recommendation Algorithm using Collaborative Filtering</title>
+      <link>https://example.com/project/01_recommendation_system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/01_recommendation_system/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

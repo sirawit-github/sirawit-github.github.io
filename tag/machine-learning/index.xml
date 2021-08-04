@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning | </title>
+    <link>https://example.com/tag/machine-learning/</link>
+      <atom:link href="https://example.com/tag/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Machine Learning</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Machine Learning</title>
+      <link>https://example.com/tag/machine-learning/</link>
+    </image>
+    
+    <item>
+      <title>Facebook’s News Feed ranking algorithm</title>
+      <link>https://example.com/post/10_fb_ranking/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/10_fb_ranking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EfficientDet: Towards Scalable Architecture in AutoML</title>
+      <link>https://example.com/post/09_automl/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/09_automl/</guid>
+      <description>&lt;h2 id=&#34;anchor-boxes&#34;&gt;Anchor Boxes&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_3.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_4.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_5.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_6.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_7.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;data-pipeline&#34;&gt;Data Pipeline&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_original.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_resize.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mingxing Tan, Ruoming Pang, Quoc V. Le. &lt;a href=&#34;https://arxiv.org/abs/1911.09070&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EfficientDet: Scalable and Efficient Object Detection&lt;/a&gt;. CVPR 2020.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DARTS: Differentiable Architecture Search</title>
+      <link>https://example.com/post/08_darts/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/08_darts/</guid>
+      <description>&lt;p&gt;Differentiable Architecture Search&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+&amp;amp;&amp;amp; \min_{\alpha} &amp;amp;&amp;amp;&amp;amp; \mathcal{L}_{val} (w^{\ast} (\alpha), \alpha) \\&lt;br&gt;
+&amp;amp;&amp;amp; \text{s.t.}   &amp;amp;&amp;amp;&amp;amp; w^{\ast} (\alpha) = \text{argmin}_{w} \space \mathcal{L}_{train} (w, \alpha) \\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Waymo Open Dataset</title>
+      <link>https://example.com/post/07_explore_waymo_perception/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/07_explore_waymo_perception/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The above is the takeaway, summarized by &lt;a href=&#34;https://twitter.com/chipro/status/1407890489697652741&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chip Huyen&lt;/a&gt;, from a CVPR 2021 talk by Andrej Karpathy, the Director of AI at Tesla. Not surprisingly, Tesla, among other big plyers like Waymo and Cruise, is one of companies that stands out from its competition.&lt;/p&gt;
+&lt;p&gt;Waymo, another big player, has released its dataset since 2019. The dataset is in &lt;a href=&#34;https://www.tensorflow.org/tutorials/load_data/tfrecord&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TFRecord&lt;/a&gt; format, which requires TensorFlow for reading. This makes the tools and data preprocessing pipeline heavily depend on TensorFlow. If we look at KITTI, Lyft, TRI, or Argoverse, all of these release their dataset in a raw, simple format. As someone who used PyTorch more than TensorFlow back in those days, it was a pain inspecting and debugging the &lt;a href=&#34;https://www.tensorflow.org/guide/data&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;tf.data&lt;/code&gt;&lt;/a&gt; stuff, when eager execution &lt;em&gt;was&lt;/em&gt; not available inside &lt;code&gt;tf.data&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Looking at this a year later, and especially having listened to Andrej Karpathy&amp;rsquo;s CVPR 2021 talk, I start to appreciate and I could probably see why Google&amp;rsquo;s Waymo has released their dataset in &lt;code&gt;TFRecord&lt;/code&gt; format. (Ironically though, if I remember correctly, the winner of the Challenge used PyTorch.)&lt;/p&gt;
+&lt;p&gt;The good news is&amp;hellip; we can now use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# TensorFlow 2.5
+tf.data.experimental.enable_debug_mode()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Enough for the introduction, let&amp;rsquo;s visualize the data.&lt;/p&gt;
+&lt;h2 id=&#34;visualizing-camera-data&#34;&gt;Visualizing Camera Data&lt;/h2&gt;
+&lt;p&gt;Most of the code is straightforward.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow as tf
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+
+# Replace FILENAME with tfrecord file
+dataset = tf.data.TFRecordDataset(FILENAME, compression_type=&#39;&#39;)
+for data in dataset:
+    frame = open_dataset.Frame()
+    frame.ParseFromString(bytearray(data.numpy()))
+    plt.figure()
+    # Draw the camera labels.
+    count = 0
+    for camera_image in frame.images:
+        for camera_labels in frame.camera_labels:
+            # Ignore camera labels that do not correspond to this camera.
+            if camera_labels.name != camera_image.name:
+                continue
+            count += 1
+            ax = plt.subplot(2, 3, count)
+            # Iterate over the individual labels.
+            for label in camera_labels.labels:
+                # Draw the object bounding box.
+                ax.add_patch(patches.Rectangle(
+                    xy=(label.box.center_x - 0.5 * label.box.length,
+                        label.box.center_y - 0.5 * label.box.width),
+                    width=label.box.length,
+                    height=label.box.width,
+                    linewidth=1,
+                    edgecolor=&#39;red&#39;,
+                    facecolor=&#39;none&#39;))
+            # Show the camera image.
+            plt.imshow(tf.image.decode_jpeg(camera_image.image))
+            plt.title(camera_image.name))
+            plt.grid(False)
+            plt.axis(&#39;off&#39;)
+    plt.show()
+    plt.close()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;br&gt;
+&lt;p&gt;The following shows some of the dataset.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/inUtJcAszXI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/S4ZGBSAm7uo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/h8X3_4qeGI4&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/UwI7cWSBmLo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;h2 id=&#34;dataset-statistics&#34;&gt;Dataset Statistics&lt;/h2&gt;
+&lt;h3 id=&#34;3d-labels&#34;&gt;3D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-248579361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./lwh_3d_waymo.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-248579361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-283794156&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_l.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-283794156&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-274598613&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_w.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-274598613&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-872149536&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_h.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-872149536&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;2d-labels&#34;&gt;2D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-471936582&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./bbox_compare.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-471936582&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Science &amp; Machine Learning In Oil And Gas Industry</title>
+      <link>https://example.com/post/05_data_sci_pttep_arv/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/05_data_sci_pttep_arv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The Oil and Gas industry is one of the most lucrative industries that has a very high operating cost. Cutting costs is therefore a major priority when it comes to this business. In this post, I share some of the mahcine learning (or data science, if you will) applications that I have worked on.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-02.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-03.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-04.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-593726814&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./pipe.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-593726814&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-176389452&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./series.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-176389452&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-385794162&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-385794162&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

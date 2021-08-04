@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | </title>
+    <link>https://example.com/post/</link>
+      <atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 07 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Posts</title>
+      <link>https://example.com/post/</link>
+    </image>
+    
+    <item>
+      <title>AI &amp; Robotics Hackathon 2021</title>
+      <link>https://example.com/post/12_arv_hackathon_2021/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/12_arv_hackathon_2021/</guid>
+      <description>&lt;p&gt;ARV Hackathon 2021 is back with the new and even more challenging problem statements that dare you to find innovative solutions in Cyber Security and Subsea Machine Learning spaces.&lt;/p&gt;
+&lt;p&gt;All tech talents, start-ups, and the next generation innovators are invited to join ARV in creating the innovative technological solutions that will transform the future of Thailand and Southeast Asia.&lt;/p&gt;
+&lt;p&gt;Stay Tuned!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Codegoda 2021</title>
+      <link>https://example.com/post/11_codegoda_2021/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/11_codegoda_2021/</guid>
+      <description>&lt;!-- &lt;details class=&#34;toc-inpage d-print-none  &#34; open&gt;
+  &lt;summary class=&#34;font-weight-bold&#34;&gt;Table of Contents&lt;/summary&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#1&#34;&gt;1.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#2&#34;&gt;2.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#3&#34;&gt;3.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#4&#34;&gt;4.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#5&#34;&gt;5.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#6-which-microservice-failed&#34;&gt;6. Which microservice failed?&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#7&#34;&gt;7.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#8&#34;&gt;8.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#9&#34;&gt;9.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#notes&#34;&gt;Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/details&gt;
+ --&gt;
+&lt;h2 id=&#34;1&#34;&gt;1.&lt;/h2&gt;
+&lt;h2 id=&#34;2&#34;&gt;2.&lt;/h2&gt;
+&lt;h2 id=&#34;3&#34;&gt;3.&lt;/h2&gt;
+&lt;h2 id=&#34;4&#34;&gt;4.&lt;/h2&gt;
+&lt;h2 id=&#34;5&#34;&gt;5.&lt;/h2&gt;
+&lt;h2 id=&#34;6-which-microservice-failed&#34;&gt;6. Which microservice failed?&lt;/h2&gt;
+&lt;p&gt;Given the services (nodes in the graph) that alert, the task is to identify which services is the root cause of the failure. A failure is a root cause only when there are no other dependencies which also fail.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mermaid&#34;&gt;graph TD;
+  A--&amp;gt;B;
+  A--&amp;gt;C;
+  B--&amp;gt;D;
+  C--&amp;gt;E;
+  E--&amp;gt;D;
+  C--&amp;gt;F;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Input (alerts):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1 E 
+3 A C E 
+2 A D 
+3 D E F 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Example output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;1 E 
+1 E 
+1 D 
+2 D F 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Explanation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The input graph (omitted) is the one shown in the diagram above.
+The input has 4 alerts.&lt;/p&gt;
+&lt;p&gt;In the first case, only service &lt;code&gt;E&lt;/code&gt; has an alert. Thus, &lt;code&gt;E&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the second alert case, services &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt; have alerts. Since &lt;code&gt;A&lt;/code&gt; depends on &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;C&lt;/code&gt; depends on &lt;code&gt;E&lt;/code&gt;, we don’t consider them the root cause. &lt;code&gt;E&lt;/code&gt; has no dependency and has an alert. Thus, &lt;code&gt;E&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the third case, services &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;D&lt;/code&gt; have alerts. Since &lt;code&gt;A&lt;/code&gt; depends on &lt;code&gt;D&lt;/code&gt; through &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt;, we still consider that the failure on service &lt;code&gt;D&lt;/code&gt; might have caused a failure on service &lt;code&gt;A&lt;/code&gt; even if the alerts on services &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt; and &lt;code&gt;E&lt;/code&gt; did not fire. Thus, &lt;code&gt;D&lt;/code&gt; is the root cause.&lt;/p&gt;
+&lt;p&gt;In the fourth case, services &lt;code&gt;D&lt;/code&gt;, &lt;code&gt;E&lt;/code&gt; and &lt;code&gt;F&lt;/code&gt; have alerts. &lt;code&gt;E&lt;/code&gt; depends on &lt;code&gt;D&lt;/code&gt;, so &lt;code&gt;E&lt;/code&gt; is not the root cause. &lt;code&gt;D&lt;/code&gt; and &lt;code&gt;F&lt;/code&gt; do not depend on any services which failed, so they both are the root causes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is probably not an optimal solution, but it came first when I tried. The idea is to construct a reverse graph and find all the descendants. In this case, the time complexity would be $O(A(E + V))$ where $A$ is the number of alerts and $V$ and $E$ is the number of vertices and edges in the graph respectively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void dfs(
+  const int root,
+  const int start,
+  const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; adj, // Adjacency list of the reversed graph
+  vector&amp;lt;bool&amp;gt;&amp;amp; visited,
+  unordered_map&amp;lt;int, bool&amp;gt;&amp;amp; root_causes
+)
+{
+  if (root != start) {
+    auto it = root_causes.find(root);
+    if (it != root_causes.end()) {
+      root_causes.erase(it);
+    }
+  }
+  visited[root] = true;
+  for (const auto n : adj[root]) {
+    if (!visited[n]) {
+      dfs(n, start, adj, visited, root_causes);
+    }
+  }
+}
+
+void solve(
+  const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; adj, // Adjacency list of the reversed graph
+  unordered_map&amp;lt;int, bool&amp;gt; services_with_alert,
+  const vector&amp;lt;string&amp;gt;&amp;amp; service_names
+)
+{
+  unordered_map&amp;lt;int, bool&amp;gt; root_causes = services_with_alert;
+  for (const auto p : services_with_alert) {
+    size_t num_services = service_names.size();
+    vector&amp;lt;bool&amp;gt; visited(num_services, false);
+    dfs(p.first, p.first, adj, visited, root_causes);
+  }
+  // print out solution
+  cout &amp;lt;&amp;lt; root_causes.size();
+  for (const auto p : root_causes) {
+    cout &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; service_names[p.first];
+  }
+  cout &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;7&#34;&gt;7.&lt;/h2&gt;
+&lt;h2 id=&#34;8&#34;&gt;8.&lt;/h2&gt;
+&lt;h2 id=&#34;9&#34;&gt;9.&lt;/h2&gt;
+&lt;br&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I couldn&amp;rsquo;t seem to find restrictions on sharing or posting questions in the terms (&lt;a href=&#34;https://codegoda.io/terms-and-conditions/)&#34;&gt;https://codegoda.io/terms-and-conditions/)&lt;/a&gt;. But if I read it wrong, Dear Agoda, please let me know if it is against the terms.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Facebook’s News Feed ranking algorithm</title>
+      <link>https://example.com/post/10_fb_ranking/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/10_fb_ranking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EfficientDet: Towards Scalable Architecture in AutoML</title>
+      <link>https://example.com/post/09_automl/</link>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/09_automl/</guid>
+      <description>&lt;h2 id=&#34;anchor-boxes&#34;&gt;Anchor Boxes&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_3.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_4.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_5.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_6.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/anchors_level_7.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;data-pipeline&#34;&gt;Data Pipeline&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_original.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/09/img_resize.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mingxing Tan, Ruoming Pang, Quoc V. Le. &lt;a href=&#34;https://arxiv.org/abs/1911.09070&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EfficientDet: Scalable and Efficient Object Detection&lt;/a&gt;. CVPR 2020.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DARTS: Differentiable Architecture Search</title>
+      <link>https://example.com/post/08_darts/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/08_darts/</guid>
+      <description>&lt;p&gt;Differentiable Architecture Search&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+&amp;amp;&amp;amp; \min_{\alpha} &amp;amp;&amp;amp;&amp;amp; \mathcal{L}_{val} (w^{\ast} (\alpha), \alpha) \\&lt;br&gt;
+&amp;amp;&amp;amp; \text{s.t.}   &amp;amp;&amp;amp;&amp;amp; w^{\ast} (\alpha) = \text{argmin}_{w} \space \mathcal{L}_{train} (w, \alpha) \\&lt;br&gt;
+\end{aligned}
+$$&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Waymo Open Dataset</title>
+      <link>https://example.com/post/07_explore_waymo_perception/</link>
+      <pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/07_explore_waymo_perception/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;The most successful ML projects in production (Tesla, iPhone, Amazon drones, Zipline) are where you own the entire stack. They iterate not just ML algorithms but also: 1) how to collect/label data, 2) infrastructure, 3) hardware ML models run on.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The above is the takeaway, summarized by &lt;a href=&#34;https://twitter.com/chipro/status/1407890489697652741&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chip Huyen&lt;/a&gt;, from a CVPR 2021 talk by Andrej Karpathy, the Director of AI at Tesla. Not surprisingly, Tesla, among other big plyers like Waymo and Cruise, is one of companies that stands out from its competition.&lt;/p&gt;
+&lt;p&gt;Waymo, another big player, has released its dataset since 2019. The dataset is in &lt;a href=&#34;https://www.tensorflow.org/tutorials/load_data/tfrecord&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TFRecord&lt;/a&gt; format, which requires TensorFlow for reading. This makes the tools and data preprocessing pipeline heavily depend on TensorFlow. If we look at KITTI, Lyft, TRI, or Argoverse, all of these release their dataset in a raw, simple format. As someone who used PyTorch more than TensorFlow back in those days, it was a pain inspecting and debugging the &lt;a href=&#34;https://www.tensorflow.org/guide/data&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;tf.data&lt;/code&gt;&lt;/a&gt; stuff, when eager execution &lt;em&gt;was&lt;/em&gt; not available inside &lt;code&gt;tf.data&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Looking at this a year later, and especially having listened to Andrej Karpathy&amp;rsquo;s CVPR 2021 talk, I start to appreciate and I could probably see why Google&amp;rsquo;s Waymo has released their dataset in &lt;code&gt;TFRecord&lt;/code&gt; format. (Ironically though, if I remember correctly, the winner of the Challenge used PyTorch.)&lt;/p&gt;
+&lt;p&gt;The good news is&amp;hellip; we can now use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# TensorFlow 2.5
+tf.data.experimental.enable_debug_mode()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Enough for the introduction, let&amp;rsquo;s visualize the data.&lt;/p&gt;
+&lt;h2 id=&#34;visualizing-camera-data&#34;&gt;Visualizing Camera Data&lt;/h2&gt;
+&lt;p&gt;Most of the code is straightforward.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow as tf
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+
+# Replace FILENAME with tfrecord file
+dataset = tf.data.TFRecordDataset(FILENAME, compression_type=&#39;&#39;)
+for data in dataset:
+    frame = open_dataset.Frame()
+    frame.ParseFromString(bytearray(data.numpy()))
+    plt.figure()
+    # Draw the camera labels.
+    count = 0
+    for camera_image in frame.images:
+        for camera_labels in frame.camera_labels:
+            # Ignore camera labels that do not correspond to this camera.
+            if camera_labels.name != camera_image.name:
+                continue
+            count += 1
+            ax = plt.subplot(2, 3, count)
+            # Iterate over the individual labels.
+            for label in camera_labels.labels:
+                # Draw the object bounding box.
+                ax.add_patch(patches.Rectangle(
+                    xy=(label.box.center_x - 0.5 * label.box.length,
+                        label.box.center_y - 0.5 * label.box.width),
+                    width=label.box.length,
+                    height=label.box.width,
+                    linewidth=1,
+                    edgecolor=&#39;red&#39;,
+                    facecolor=&#39;none&#39;))
+            # Show the camera image.
+            plt.imshow(tf.image.decode_jpeg(camera_image.image))
+            plt.title(camera_image.name))
+            plt.grid(False)
+            plt.axis(&#39;off&#39;)
+    plt.show()
+    plt.close()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;br&gt;
+&lt;p&gt;The following shows some of the dataset.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/inUtJcAszXI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/S4ZGBSAm7uo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/h8X3_4qeGI4&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/UwI7cWSBmLo&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;h2 id=&#34;dataset-statistics&#34;&gt;Dataset Statistics&lt;/h2&gt;
+&lt;h3 id=&#34;3d-labels&#34;&gt;3D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-248579361&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./lwh_3d_waymo.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-248579361&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-283794156&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_l.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-283794156&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-274598613&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_w.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-274598613&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+
+
+&lt;div id=&#34;chart-872149536&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./histogram_h.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-872149536&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;h3 id=&#34;2d-labels&#34;&gt;2D Labels&lt;/h3&gt;
+
+
+&lt;div id=&#34;chart-471936582&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./bbox_compare.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-471936582&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fast Execution with CUDA!</title>
+      <link>https://example.com/post/06_cuda_basic/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/06_cuda_basic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Science &amp; Machine Learning In Oil And Gas Industry</title>
+      <link>https://example.com/post/05_data_sci_pttep_arv/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/05_data_sci_pttep_arv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The Oil and Gas industry is one of the most lucrative industries that has a very high operating cost. Cutting costs is therefore a major priority when it comes to this business. In this post, I share some of the mahcine learning (or data science, if you will) applications that I have worked on.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-01.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-02.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-03.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/05/post_05-04.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-593726814&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./pipe.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-593726814&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-176389452&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./series.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-176389452&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+&lt;br&gt;
+
+
+&lt;div id=&#34;chart-385794162&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-385794162&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Custom Sonar Simulation in Gazebo</title>
+      <link>https://example.com/post/04_sonar_sim/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/04_sonar_sim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Quest to Build an Autonomous Underwater Vehicle</title>
+      <link>https://example.com/post/03_the_quest_to_build_auv/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/03_the_quest_to_build_auv/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;We stand on the brink of a technological revolution. Soon, few of us will own our own automobiles and instead will get around in driverless electric vehicles that we summon with the touch of an app. We will be liberated from driving, prevent over 90% of car crashes, provide freedom of mobility to the elderly and disabled, and decrease our dependence on fossil fuels.&amp;rdquo; — The Quest to Build the Driverless Car&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The same applies to oil and gas industry. Although robotic technologies have entered the oil and gas industry for around some time, the quest to build the autonomous underwater vehicle must go on!&lt;/p&gt;
+&lt;p&gt;In this post, I will briefly write about the kind of the things we do at our R&amp;amp;D team. (Please note that I cannot write all the details and so I have skipped some parts.)&lt;/p&gt;
+&lt;h2 id=&#34;a-system&#34;&gt;A System&lt;/h2&gt;
+&lt;p&gt;What do we need in order to build an autonomous underwater vehicle and its system?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hardware&lt;/li&gt;
+&lt;li&gt;Software
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#navigation-software&#34;&gt;Navigation software&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#perception-algorithms&#34;&gt;Perception algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;&#34;&gt;Planning algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#control-algorithms&#34;&gt;Control algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#simulation-platform&#34;&gt;Simulation platform&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data-analytics-software&#34;&gt;Data analytics software&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All the teams (software, electrical, and mechanical) collaboratively design the robot. The physical aspect of the robot is mainly designed by a mechanical engineer team where they need to consider things such as the dynamic model, hydrodynamic model, robot mechanisms, and etc. The electrical engineer team is the ones who design and lay out electrical circuits connecting all components to a system. The software team mostly look at the high level aspect of the robot such as what sensors, what algorithms, how to communicate with the vessel, how many computing units, how to store logging data, and the list goes on.&lt;/p&gt;
+&lt;h2 id=&#34;hardware&#34;&gt;Hardware&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/03/01.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/03/02.jpeg&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;navigation-software&#34;&gt;Navigation Software&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IMU dead reckoning&lt;/li&gt;
+&lt;li&gt;SLAM&lt;/li&gt;
+&lt;li&gt;Map building&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;perception-algorithms&#34;&gt;Perception Algorithms&lt;/h2&gt;
+&lt;p&gt;Perception algorithms are probably the key to intelligent autonomous vehicles. At ARV, we have developed several algorithms, including but not limited to 2D object detection, 3D object detection, point cloud-related algorithms, etc., in order to tackle the challenges we encountered in subsea robotics.&lt;/p&gt;
+&lt;p&gt;We have also developed several machine learning and &lt;a href=&#34;https://sirawit-github.github.io/post/05_data_sci_pttep_arv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;deep learning models for automatic pipeline inspection&lt;/a&gt; as well. These are used both in online (real-time) and offline (&lt;a href=&#34;#data-analytics-software&#34;&gt;data analytics software&lt;/a&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;planning-algorithms&#34;&gt;Planning Algorithms&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Way point planning&lt;/li&gt;
+&lt;li&gt;Optimal path planning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;control-algorithms&#34;&gt;Control Algorithms&lt;/h2&gt;
+&lt;h2 id=&#34;simulation-platform&#34;&gt;Simulation Platform&lt;/h2&gt;
+&lt;p&gt;This is probably the testbed of our robotics software development. We use &lt;a href=&#34;http://gazebosim.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gazebo&lt;/a&gt; as a simulator for realistic simulation, with some custom-implemented sensor plugins that we developed for our own use.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/04/simulation_old.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Of course, these custom plugins should run very fast for the simulation to run smoothly, so the algorihtms must be hevily optimized. For example, the custom sonar plugin was implemented in CUDA to speed things up.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/06/cuda.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;data-analytics-software&#34;&gt;Data Analytics Software&lt;/h2&gt;
+&lt;p&gt;The collected data when the robot operates at the seabed must be analyzed in some way. We build our web application where customers can log in to see the analyzed data (as well as raw data) and the generated report.&lt;/p&gt;
+
+
+&lt;div id=&#34;chart-617389524&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+  (function() {
+    let a = setInterval( function() {
+      if ( typeof window.Plotly === &#39;undefined&#39; ) {
+        return;
+      }
+      clearInterval( a );
+
+      Plotly.d3.json(&#34;./data.json&#34;, function(chart) {
+        Plotly.plot(&#39;chart-617389524&#39;, chart.data, chart.layout, {responsive: true});
+      });
+    }, 500 );
+  })();
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Real-time 3D Object Detection from Point Clouds</title>
+      <link>https://example.com/post/02_3d_object_detection/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/02_3d_object_detection/</guid>
+      <description>&lt;h2 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h2&gt;
+&lt;h2 id=&#34;2-model-implementation&#34;&gt;2. Model Implementation&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/pixor_model.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;3-initial-results&#34;&gt;3. Initial Results&lt;/h2&gt;
+&lt;h3 id=&#34;31-single-class-detection&#34;&gt;3.1 Single Class Detection&lt;/h3&gt;
+&lt;h3 id=&#34;simple-scenes&#34;&gt;Simple Scenes&lt;/h3&gt;
+&lt;p&gt;Currently the model is trained on a single class: &lt;code&gt;car&lt;/code&gt;. For the following result, green indicates the ground truth labels, and light blue indicates the predicted results.&lt;/p&gt;
+&lt;p&gt;In a simple scene, the model seems to recognize all the car objects:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_64.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_83.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;harder&#34;&gt;Harder&lt;/h3&gt;
+&lt;p&gt;Since the model is trained using only the top view LIDAR data, it is reasonable that the model can miss the cases where thr LIDAR point cloud of the object is sparse:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/img_95_3dbox_gt.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_95_sparse_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;easy-mistake&#34;&gt;Easy Mistake&lt;/h3&gt;
+&lt;p&gt;However, the model still misses some obvious detection, such as in the following scene. Here, the front car in the very middle doesn&amp;rsquo;t get detected.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/img_49_3dbox_gt.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_49.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;why-top-view&#34;&gt;Why Top View?&lt;/h3&gt;
+&lt;p&gt;What I think the top view (or bird&amp;rsquo;s eye view) approach can do well is that: It can detect the objects which are occluded in the front camera view. If we look at the following image, the car on the very right of the image is largely occluded:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/zoom.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_99_front.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;However, viewing the point cloud from the top, these 2 cars are clearly separated in the space, and therefore the model can easily detect the targeted objects:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/02/model_6000_img_99_occlusion_top.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;32-multi-class-detection&#34;&gt;3.2 Multi-Class Detection&lt;/h3&gt;
+&lt;h2 id=&#34;4-final-results&#34;&gt;4. Final Results&lt;/h2&gt;
+&lt;h2 id=&#34;5-my-thoughts&#34;&gt;5. My Thoughts&lt;/h2&gt;
+&lt;h2 id=&#34;6-references&#34;&gt;6. References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;H. Su, S. Maji, E. Kalogerakis, and E. G. Learned-Miller. &lt;a href=&#34;&#34;&gt;Multi-view convolutional neural networks for 3d shaperecognition&lt;/a&gt; ICCV, 2015&lt;/li&gt;
+&lt;li&gt;Bin Yang, Wenjie Luo, and Raquel Urtasun. &lt;a href=&#34;&#34;&gt;PIXOR: Real-time 3d object detection from point clouds&lt;/a&gt; CVPR, 2018&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Visual Odometry Implementation from Scratch</title>
+      <link>https://example.com/post/01_visual_odometry/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/01_visual_odometry/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This is the first-ever post of my blog; so I will give it a try. This post is about things that I went through when I tried to implement a simple monocular visual odometry from scratch. For a programming language, I choose MATLAB because it is easy-to-use and fast for prototyping a project.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt;&lt;/em&gt; This is not a state-of-the-art implementation. This simply serves the purpose of learning.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;To give a general idea, visual odometry (VO) is an algorithm that aims to recover the path incrementally, by using the visual input from cameras, and hence the name. It can be considered as a sequential structure from motion, as opposed to hierarchical structure from motion. Imagine a robot or an agent, attached with a calibrated camera $C$, moves through an environment and receives the image continuously. The images $I_k, I_{k-1}$ are taken at different time steps $k$ and $k-1$, which corresponds to the camera pose $C_k$ and $C_{k-1}$ respectively. The task of VO is basically to retrieve the transformation matrix $T = \left[R \lvert t \right]$ that relates two camera poses, and concatenate all the transformaitons $T_k$ to get the current camera pose:&lt;/p&gt;
+&lt;p&gt;$$ C_{t} = T_{t,t-1}C_{t-1}$$&lt;/p&gt;
+&lt;h2 id=&#34;getting-things-up--running&#34;&gt;Getting Things Up &amp;amp; Running&lt;/h2&gt;
+&lt;p&gt;I first have an initialization function &lt;code&gt;vo_initialize.m&lt;/code&gt; that takes two image frames, establishing keypoint correspondences between these two frames using KLT feature tracker, estimating relative camera pose, and finally triangulating an initial 3D point cloud landmarks. I admit that these may sound lacking of excitement (as they are something that is well understood in the computer vision community), but they are not easy to implement from scratch in a single sit.&lt;/p&gt;
+&lt;h3 id=&#34;feature-detection&#34;&gt;Feature Detection&lt;/h3&gt;
+&lt;p&gt;This is a simple plementation of Harris corner detector. For each pixel $(u,v)$, we calculate a score&lt;/p&gt;
+&lt;p&gt;$$R = det(A_{u,v}) - {\lambda}trace^2(A_{u,v})$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ A_{u,v} = \begin{bmatrix} \sum{I^2_{x}} &amp;amp; \sum{I_{x}I_{y}}\ \sum{I_{x}I_{y}} &amp;amp; \sum{I^2_{y}} \end{bmatrix} $$&lt;/p&gt;
+&lt;p&gt;and $I_x, I_y$ are the image gradients in $x$ and $y$ direction respectively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;I_x = conv2(img, [-1 0 1; -2 0 2; -1 0 1], &#39;valid&#39;);
+I_y = conv2(img, [-1 -2 -1; 0 0 0; 1 2 1], &#39;valid&#39;);
+I_xx = double(I_x.^2);
+I_yy = double(I_y.^2);
+I_xy = double(I_x.*I_y);
+I_xx_sum = conv2(I_xx, ones(patch_size), &#39;valid&#39;);
+I_yy_sum = conv2(I_yy, ones(patch_size), &#39;valid&#39;);
+I_xy_sum = conv2(I_xy, ones(patch_size), &#39;valid&#39;);
+
+pad_size = floor((patch_size+1)/2);
+scores = (I_xx_sum.*I_yy_sum - I_xy_sum.^2) - lambda*(I_xx_sum + I_yy_sum).^2;
+scores(scores &amp;lt; 0) = 0;
+scores = padarray(scores, [pad_size pad_size]);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After calculating the score, we simply select $k$ keypoints with highest scores (with non-maximum suppression).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;scores_pad = padarray(scores, [r r]);
+score_size = size(scores_pad);
+keypoints = zeros(2, k);
+for i = 1:k
+    [~, idx] = max(scores_pad, [], &#39;all&#39;, &#39;linear&#39;);
+    [row, col] = ind2sub(score_size, idx);
+    keypoints(:, i) = [row; col] - r;
+    scores_pad(row-r:row+r, col-r:col+r) = 0;
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;klt-feature-tracker&#34;&gt;KLT Feature Tracker&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;pose-estimation&#34;&gt;Pose Estimation&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;triangulation&#34;&gt;Triangulation&lt;/h3&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result of &lt;code&gt;vo_initialize.m&lt;/code&gt; seems reasonable. Good to go!&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://example.com/image/post/01/post.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;problems-from-previous-implementation&#34;&gt;Problems from Previous Implementation&lt;/h2&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;estimate-world-camera-pose&#34;&gt;Estimate World Camera Pose&lt;/h2&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;bundle-adjustment&#34;&gt;Bundle Adjustment&lt;/h2&gt;
+&lt;p&gt;Bundle adjustment is a very cool concept. To put it simply, it is an optimization algorithm used to refine the estimated trajectory.&lt;/p&gt;
+&lt;p&gt;In this implementation, a &lt;em&gt;motion-only&lt;/em&gt; bundle adjustment is implemented, which optimizes only the camera orientation $R$ and position $t$. This implies that&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-matlab&#34;&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
+&lt;p&gt;Putting it all together, the &lt;code&gt;vo_initialize.m&lt;/code&gt; function initializes the VO pipeline, creating initial 3D point landmarks, extracting initial keypoints, and estimating the initial pose of the camera. The &lt;code&gt;vo_process.m&lt;/code&gt; sequentially extracting and tracking image features from an image frame, across frames, and simultaneously estimating the pose of the camera. Bundle adjustment is also implemented to refine the estimated pose at each step. Lastly, new 3D points are regularly created as the number of currently tracked keypoints is shrinking over time. The following is the final result.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/A5HnnSiZ_LM&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+&lt;p&gt;From the video, it is obvious that this is not a state-of-the-art implementation. There are various components that are not implemented. As we can see, the estimated trajectory starts to deviate from the ground truth after some time, due to the scale drift&amp;ndash;a common problem in monocular VO. The estimated trajetory also wiggles slightly, probaly due to the fact that the full bundle adjustment is not implemented. And the most importantly, I did not try to implement a loop closure.&lt;/p&gt;
+&lt;h2 id=&#34;reflections&#34;&gt;Reflections&lt;/h2&gt;
+&lt;p&gt;The task of implementing VO from scratch may sound lacking of excitement. I believe that the conventional pipeline of VO and SLAM is something that is already well-understood in the computer vision community. What I realize is that academic papers usually have missing steps that are left for the readers to figure out. Here, I tried to connect those steps and the result stands as a self-assesment of my understanding.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
